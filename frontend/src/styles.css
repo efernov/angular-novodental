@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+header {
+  background-color:bisque;
+}
+a {
+  color: brown;
+}
+img,
+
+video,
+
+object,
+
+embed {
+
+  max-width: 100%;
+
+  height: auto;
+
+}
+#ortodoncia {
+  font-size: 50px;
+  color: blue;
+}
+/* Hacer la imagen completamente responsive */
+.carousel-inner img {
+  width: 100%;
+  height: 100%;
+}
+footer {
+  background-color: aqua;
+}

@@ -13,6 +13,6 @@ export class FooterComponent implements OnInit {
   }
 
 }
-$(function(){
-  $('[data-toggle="popover"]').popover();
-});
+// $(function(){
+//   $('[data-toggle="popover"]').popover();
+// });

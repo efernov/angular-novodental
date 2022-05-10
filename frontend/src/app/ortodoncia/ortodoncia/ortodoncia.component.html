@@ -1,0 +1,76 @@
+
+  <form class="container-fluid">
+    <section class="row">
+      <article class="col">
+        <label>Tipo de Trabajo</label>
+        <textarea class="form-control" id="Tipo de Trabajo" rows="4" placeholder="Escriba tipo de trabajo"></textarea><br><br>
+        <div class="nav justify-content-end">
+          <input class="btn btn-danger btn-sm" type="reset" value="Borrar">
+        </div>
+      </article>
+      <article class="col">
+         <div class="nav justify-content-center">
+           <div class="flex-column">
+            <p>  ID Trabajo:  <input type="text" name="ID Trabajo" size="30"></p>
+            <p>  Fecha Entrada Trabajo:  <input type="date" name="fecha" min="2022-01-01" max="2025-01-01"> </p>
+            <p>  Fecha Salida Trabajo:  <input type="date" name="fecha" min="2022-01-01" max="2025-01-01"> </p><br><br>
+            </div>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th class="nav justify-content-start">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
+                      <span class="sr-only">Nuevo Material</span>
+                    </button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="alambre">Alambre diametro 0.25 mm longitud 20 cm</a>
+                      <a class="dropdown-item" href="#tornillo">Tornillo bidireccional 10 mm apertura</a>
+                      <a class="dropdown-item" href="#">Cualquier otro aquí</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#"></a>
+                    </div>
+                  </div>
+                  <span class="nav justify-content-end">MATERIALES NECESARIOS</span>
+                  </th>
+                </tr>
+                <tr>
+                  <th>DESCRIPCION</th>
+                  <th>Cantidad</th>
+                  <th>Precio</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td scope="row"></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                   <td scope="row"></td>
+                   <td></td>
+                   <td></td>
+                </tr>
+                <tr>
+                  <td scope="row"></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                   <td scope="row"></td>
+                   <td></td>
+                   <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </article>
+      <article class="col">
+        <img  width="100" height="200" src="assets/odontograma.gif" alt="Odontograma" rows="10" col="2">
+      </article>
+    </section>
+    <article class="nav justify-content-center">
+      <button type="submit" class="btn btn-outline-success">ACEPTAR</button>
+
+    </article>
+  </form>

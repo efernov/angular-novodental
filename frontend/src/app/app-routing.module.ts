@@ -13,6 +13,12 @@ const routes: Routes = [
     path: "about",
     loadChildren: () => import("src/app/about/about.module").then(m => m.AboutModule),
   },
+
+  {
+    path: "ortodoncia",
+    loadChildren: () => import("src/app/ortodoncia/ortodoncia.module").then(m => m.OrtodonciaModule),
+  },
+
   {
     path: "not-found",
     component: NotFoundComponent,

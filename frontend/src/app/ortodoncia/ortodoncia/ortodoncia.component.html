@@ -19,19 +19,14 @@
               <thead>
                 <tr>
                   <th class="nav justify-content-start">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
-                      <span class="sr-only">Nuevo Material</span>
-                    </button>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="alambre">Alambre diametro 0.25 mm longitud 20 cm</a>
-                      <a class="dropdown-item" href="#tornillo">Tornillo bidireccional 10 mm apertura</a>
-                      <a class="dropdown-item" href="#">Cualquier otro aquí</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#"></a>
-                    </div>
-                  </div>
-                  <span class="nav justify-content-end">MATERIALES NECESARIOS</span>
+
+                   <label for="material">Nuevo Material:</label>
+                    <select name="material" id="material">
+                      <option value="alambre">Alambre</option>
+                      <option value="tornillo">Tornillo</option>
+                    </select>
+
+                  <span class="nav align-content-center">MATERIALES NECESARIOS</span>
                   </th>
                 </tr>
                 <tr>

@@ -19,7 +19,16 @@ const routes: Routes = [
         component: TornilloComponent,
       },
     ]
+  },
+  {
+    path: "alambre",
+    component: AlambreComponent,
+  },
+  {
+    path: "tornillo",
+    component: TornilloComponent,
   }
+
 ];
 
 @NgModule({

@@ -1,0 +1,201 @@
+<form #ortodonciaForm="ngForm">
+  <section class="row">
+    <article class="col-8">
+          <div class="row">
+            <article class="col">
+              <label> Tipo de Trabajo</label>
+              <textarea
+              type="text"
+              class="form-control"
+              [(ngModel)]="ortodoncia.tipoTrabajo"
+              placeholder="Escriba Tipo de Trabajo"
+              name="tipoTrabajo"
+              rows="4"
+              required
+              minlength="8"
+              maxlength="50"
+              #tipoTrabajo="ngModel"
+              [ngClass]="{
+              'is-invalid': tipoTrabajo.invalid && (tipoTrabajo.dirty || tipoTrabajo.touched),
+              'is-valid': !tipoTrabajo.invalid
+              }"></textarea>
+              <div
+                class="text-danger"
+              *ngIf="tipoTrabajo.invalid && (tipoTrabajo.dirty || tipoTrabajo.touched)"
+              >
+              <div *ngIf="tipoTrabajo.errors?.['required']">
+                El Tipo de Trabajo es obligatorio
+              </div>
+              <div *ngIf="tipoTrabajo.errors?.['minlength']">
+                El tipo de Trabajo debe tener minimo 8 caracteres y maximo 32 caracteres
+              </div>
+              </div>
+            </article>
+            <article class="col">
+              <div class="nav justify-content-center">
+                <div class="flex-column">
+                  <p>  ID Trabajo:  <input type="text" name="ID Trabajo" size="30"></p>
+                  <label>Fecha Entrada Ortodoncia<sup class="text-danger">*</sup></label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    [(ngModel)]="ortodoncia.fechaEntrada"
+                    placeholder="dd-mm-aaaa"
+                    name="fechaent" required
+                    min="2022-01-01" max="2025-01-01"
+                    #fechaent="ngModel"
+                    [ngClass]="{
+                      'is-invalid': fechaent.invalid && (fechaent.dirty || fechaent.touched),
+                      'is-valid': !fechaent.invalid
+                    }"
+                  />
+                  <div class="text-danger"
+                    *ngIf="fechaent.invalid && (fechaent.dirty || fechaent.touched)">
+                      <div *ngIf="fechaent.errors?.['required']">
+                        La fecha de Entrada de la Ortodoncia es obligatorio
+                      </div>
+                  </div>
+                  <label>Fecha Salida Ortodoncia <sup class="text-danger">*</sup></label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    [(ngModel)]="ortodoncia.fechaSalida"
+                    placeholder="dd-mm-aaaa"
+                    name="fechasal"
+                    required
+                    min="2022-01-01"
+                    max="2025-01-01"
+                    #fechasal="ngModel"
+                    [ngClass]="{
+                      'is-invalid': fechasal.invalid && (fechasal.dirty || fechasal.touched),
+                      'is-valid': !fechasal.invalid
+                    }"
+                  />
+                  <div class="text-danger"
+                    *ngIf="fechasal.invalid && (fechasal.dirty || fechasal.touched)">
+                      <div *ngIf="fechasal.errors?.['required']">
+                        La fecha de Salida de la Ortodoncia es obligatorio
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+           <div class="row">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th class="nav justify-content-center">
+
+                      <label for="material">Nuevo Material:</label>
+                      <select name="material" id="material">
+                        <option value="alambre" routerLink="/ortodoncia/alambre">Alambre</option>
+                        <option value="tornillo" routerLink="/ortodoncia/tornillo">Tornillo</option>
+                      </select>
+
+                      <span class="nav align-content-center">MATERIALES NECESARIOS</span>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>DESCRIPCION</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td scope="row"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td scope="row"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td scope="row"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td scope="row"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+           </div>
+           <div class="row">
+             <div class="col-10"></div>
+             <div class="col-2">
+                <label>Importe ortodoncia <sup class="text-danger">*</sup></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="ortodoncia.importeOrtodoncia"
+                  placeholder="Introduzca el Importe total"
+                  name="importe"
+                  required
+                  minlength="2"
+                  maxlength="3"
+                  #importe="ngModel"
+                  [ngClass]="{
+                    'is-invalid': importe.invalid && (importe.dirty || importe.touched),
+                    'is-valid': !importe.invalid
+                  }"
+                />
+                <div
+                  class="text-danger"
+                  *ngIf="importe.invalid && (importe.dirty || importe.touched)"
+                  >
+                  <div *ngIf="importe.errors?.['required']">
+                    El Importe de la Ortodoncia es obligatorio
+                  </div>
+                  <div *ngIf="importe.errors?.['minlength']">
+                    El Importe debe tener al menos 2 caracteres
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row justify-content-between pt-5">
+              <div class="col-lg-5 col-md-12">
+                <button
+                class="btn btn-primary"
+                role="button"
+                (click)="create()"
+                routerLink="/ortodoncias"
+                [disabled]="!ortodonciaForm.valid"
+                >
+                Crear Ortodoncia
+                </button>
+              </div>
+            </div>
+    </article>
+    <article class="col-4">
+          <img  width="300" height="400" src="assets/odontograma.gif" alt="Odontograma" rows="10" col="2">
+          <div class="row align-items-end">
+            <div class="col">
+              <div class="nav justify-content-start">
+                <input class="btn btn-danger btn-sm" type="reset" value="Borrar">
+              </div>
+            </div>
+            <div class="col">
+              <article class="nav justify-content-end">
+                <input type="submit" class="btn btn-success btn-sm" value="Aceptar">
+              </article>
+            </div>
+          </div>
+    </article>
+  </section>
+</form>

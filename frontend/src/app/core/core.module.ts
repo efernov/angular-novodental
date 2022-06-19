@@ -5,7 +5,8 @@ import { HeaderComponent } from './shell/header/header.component';
 import { MainComponent } from './shell/main/main.component';
 import { FooterComponent } from './shell/footer/footer.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { AppRoutingModule } from '../app-routing.module';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -19,7 +20,8 @@ import { AppRoutingModule } from '../app-routing.module';
   ],
   imports: [
     CommonModule,
-    AppRoutingModule
+    FormsModule,
+    RouterModule
   ],
   exports: [ShellComponent]
 })

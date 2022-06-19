@@ -1,0 +1,132 @@
+
+  <!-- <form class="container-fluid">
+    <section class="row">
+      <article class="col-8">
+        <div class="row">
+          <article class="col">
+            <label>Tipo de Trabajo</label>
+            <textarea class="form-control" id="Tipo de Trabajo" rows="4" placeholder="Escriba tipo de trabajo"></textarea><br><br>
+
+          </article>
+          <article class="col">
+            <div class="nav justify-content-center">
+              <div class="flex-column">
+              <p>  ID Trabajo:  <input type="text" name="ID Trabajo" size="30"></p>
+              <p>  Fecha Entrada Trabajo:  <input type="date" name="fecha" min="2022-01-01" max="2025-01-01"> </p>
+              <p>  Fecha Salida Trabajo:  <input type="date" name="fecha" min="2022-01-01" max="2025-01-01"> </p><br><br>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="row">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th class="nav justify-content-center">
+
+                   <label for="material">Nuevo Material:</label>
+                    <select name="material" id="material">
+                      <option value="alambre" routerLink="/ortodoncia/alambre">Alambre</option>
+                      <option value="tornillo" routerLink="/ortodoncia/tornillo">Tornillo</option>
+                    </select>
+
+                    <span class="nav align-content-center">MATERIALES NECESARIOS</span>
+                  </th>
+                </tr>
+                <tr>
+                  <th>DESCRIPCION</th>
+                  <th>Cantidad</th>
+                  <th>Precio</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td scope="row"></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                   <td scope="row"></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                </tr>
+                <tr>
+                  <td scope="row"></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                   <td scope="row"></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+      </article>
+
+      <article class="col-4">
+        <img  width="300" height="400" src="assets/odontograma.gif" alt="Odontograma" rows="10" col="2">
+        <div class="row align-items-end">
+          <div class="col">
+            <div class="nav justify-content-start">
+              <input class="btn btn-danger btn-sm" type="reset" value="Borrar">
+            </div>
+          </div>
+          <div class="col">
+            <article class="nav justify-content-end">
+              <input type="submit" class="btn btn-success btn-sm" value="Aceptar">
+            </article>
+          </div>
+      </div>
+      </article>
+    </section>
+  </form> -->
+
+
+  <section>
+    <div class="row">
+      <div class="col-8 col-sm-8 col-md-2 col-lg-2 col-xl-2">TIPO_DE_TRABAJO</div>
+      <div class="col-8 col-sm-8 col-md-2 col-lg-2 col-xl-2">ID DEL TRABAJO</div>
+      <div class="col-8 col-sm-8 col-md-2 col-lg-2 col-xl-2">FECHA_ENTRADA</div>
+      <div class="col-8 col-sm-8 col-md-2 col-lg-2 col-xl-2">FECHA_SALIDA</div>
+      <div class="col-48col-sm-8 col-md-2 col-lg-2 col-xl-2">MATERIALES</div>
+    </div>
+    </section>
+
+    <div *ngFor = "let ortodoncia of ortodoncias">
+      <app-ortodoncia-item [ortodoncia]="ortodoncia" (ortodonciaSeleccionada) = "verDatos($event)"></app-ortodoncia-item>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalOrtodoncia" tabindex="-1" role="dialog" aria-labelledby="datosOrtodoncia"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="datosOrtodoncia">Datos Completos de Ortodoncia</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <app-ortodoncia [ortodoncia] ='ortodonciaVerDatos' (ortodonciaEliminar) = 'onOrtodonciaEliminar($event)'></app-ortodoncia>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+

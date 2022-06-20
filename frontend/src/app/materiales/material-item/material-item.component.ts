@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { MaterialImpl } from '../models/material-impl';
 
 @Component({
   selector: 'app-material-item',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./material-item.component.css']
 })
 export class MaterialItemComponent implements OnInit {
+  @Input() material: MaterialImpl = new MaterialImpl(0, 0, "", "");
 
   constructor() { }
 

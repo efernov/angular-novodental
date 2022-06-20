@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AlambreComponent } from './alambre/alambre.component';
 import { OrtodonciaFormComponent } from './ortodoncia-form/ortodoncia-form.component';
 import { OrtodonciasComponent } from './ortodoncias/ortodoncias.component';
+import { TornilloComponent } from './tornillo/tornillo.component';
 
 
 const routes: Routes = [
@@ -12,6 +14,14 @@ const routes: Routes = [
   {
     path: "formulario",
     component: OrtodonciaFormComponent
+  },
+  {
+    path: "tornillo",
+    component: TornilloComponent
+  },
+  {
+    path: "alambre",
+    component: AlambreComponent
   }
 ];
 

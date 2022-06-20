@@ -10,6 +10,8 @@ import { AuxiliarService } from '../service/auxiliar.service';
 import { OrtodonciaFormComponent } from './ortodoncia-form/ortodoncia-form.component';
 import { OrtodonciaItemComponent } from './ortodoncia-item/ortodoncia-item.component';
 import { OrtodonciaComponent } from './ortodoncias/ortodoncia/ortodoncia.component';
+import { AlambreComponent } from './alambre/alambre.component';
+import { TornilloComponent } from './tornillo/tornillo.component';
 
 
 
@@ -20,6 +22,8 @@ import { OrtodonciaComponent } from './ortodoncias/ortodoncia/ortodoncia.compone
     OrtodonciaFormComponent,
     OrtodonciaItemComponent,
     OrtodonciaComponent,
+    AlambreComponent,
+    TornilloComponent,
 
      ],
   imports: [

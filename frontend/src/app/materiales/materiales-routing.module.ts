@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AlambreComponent } from './alambre/alambre.component';
 import { MaterialFormComponent } from './material-form/material-form.component';
 import { MaterialesComponent } from './materiales/materiales.component';
+import { TornilloComponent } from './tornillo/tornillo.component';
 
 const routes: Routes = [
   {
@@ -11,7 +13,16 @@ const routes: Routes = [
   {
     path: "formulario",
     component: MaterialFormComponent
+  },
+  {
+    path: "tornillo",
+    component: TornilloComponent
+  },
+  {
+    path: "alambre",
+    component: AlambreComponent
   }
+
 ];
 
 @NgModule({

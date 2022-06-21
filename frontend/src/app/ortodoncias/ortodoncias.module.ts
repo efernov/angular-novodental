@@ -12,6 +12,8 @@ import { OrtodonciaItemComponent } from './ortodoncia-item/ortodoncia-item.compo
 import { OrtodonciaComponent } from './ortodoncias/ortodoncia/ortodoncia.component';
 import { AlambreComponent } from './alambre/alambre.component';
 import { TornilloComponent } from './tornillo/tornillo.component';
+import { AlambreItemComponent } from './alambre-item/alambre-item.component';
+import { TornilloItemComponent } from './tornillo-item/tornillo-item.component';
 
 
 
@@ -24,6 +26,8 @@ import { TornilloComponent } from './tornillo/tornillo.component';
     OrtodonciaComponent,
     AlambreComponent,
     TornilloComponent,
+    AlambreItemComponent,
+    TornilloItemComponent,
 
      ],
   imports: [

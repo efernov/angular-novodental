@@ -1,11 +1,12 @@
 <div class="row mb-2">
   <hr class='w-100'>
-  <div class="col-10 col-sm-10 col-md-3 col-lg-3 col-xl-3"><a class="" data-toggle="modal"
-    data-target="#modalUsuario" (click)='ortodonciaSeleccionada.emit(ortodoncia)'>{{ortodoncia.tipoTrabajo}}</a></div>
+  <div class="col-10 col-sm-10 col-md-3 col-lg-3 col-xl-3"><a class="" data-bs-toggle="modal"
+    data-bs-target="#modalOrtodoncia" (click)='ortodonciaSeleccionada.emit(ortodoncia)'>{{ortodoncia.tipoTrabajo}}</a></div>
   <div class="col-10 col-sm-10 col-md-3 col-lg-2 col-xl-2">{{ortodoncia.id}}</div>
   <div class="col-10 col-sm-10 col-md-3 col-lg-2 col-xl-2">{{ortodoncia.fechaEntrada}}</div>
   <div class="col-10 col-sm-10 col-md-3 col-lg-3 col-xl-3">{{ortodoncia.fechaSalida}}</div>
-  <div class="col-10 col-sm-10 col-md-3 col-lg-3 col-xl-3"><button class="btn btn-info" [routerLink]="['materiales', ortodoncia.materiales]">Ver Materiales</button></div>
+  <!-- <div class="col-10 col-sm-10 col-md-3 col-lg-3 col-xl-3"><button class="btn btn-info" [routerLink]="['/materiales', ortodoncia.materiales]">Ver Materiales</button></div> -->
+  <div class="col-10 col-sm-10 col-md-3 col-lg-3 col-xl-3"><button class="btn btn-info" routerLink = "/materiales">Ver Materiales</button></div>
   <div class="col-10 col-sm-10 col-md-2 col-lg-2 col-xl-2">
   </div>
 </div>

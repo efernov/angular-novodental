@@ -86,48 +86,46 @@
                 <thead>
                   <tr>
                     <th class="nav justify-content-center">
-
                       <label for="material">Nuevo Material:</label>
-                      <select name="material" id="material">
-                        <option value="alambre" routerLink="/ortodoncias/alambre">Alambre</option>
-                        <option value="tornillo" routerLink="/ortodoncias/tornillo">Tornillo</option>
-                      </select>
-
-                      <span class="nav align-content-center">MATERIALES NECESARIOS</span>
+                        <select name="material" id="material">
+                          <option value="alambre"  data-bs-toggle="modal" data-bs-target="#alambre">Alambre</option>
+                          <option value="tornillo" data-bs-toggle="modal" data-bs-target="#tornillo">Tornillo</option>
+                        </select>
+                     <span class="nav align-content-center">MATERIALES NECESARIOS</span>
                     </th>
                   </tr>
                   <tr>
-                    <th>DESCRIPCION</th>
-                    <th>Cantidad</th>
-                    <th>Precio</th>
-                    <th></th>
-                    <th></th>
+                    <th scope="col">DESCRIPCION</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td scope="row"></td>
+                    <th scope="row"></th>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td scope="row"></td>
+                    <th scope="row"></th>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td scope="row"></td>
+                    <th scope="row"></th>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td scope="row"></td>
+                    <th scope="row"></th>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -182,6 +180,7 @@
               </div>
             </div>
     </article>
+
     <article class="col-4">
           <img  width="300" height="400" src="assets/odontograma.gif" alt="Odontograma" rows="10" col="2">
           <div class="row align-items-end">
@@ -199,3 +198,42 @@
     </article>
   </section>
 </form>
+
+
+<!-- Modal Alambre-->
+<div class="modal fade" id="alambre" tabindex="-1" aria-labelledby="alambre" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-alambre></app-alambre>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Tornillo-->
+<div class="modal fade" id="tornillo" tabindex="-1" aria-labelledby="tornillo" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-tornillo></app-tornillo>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

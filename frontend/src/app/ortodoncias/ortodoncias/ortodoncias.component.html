@@ -97,11 +97,10 @@
 
   <section>
     <div class="row">
-      <div class="col-8 col-sm-8 col-md-2 col-lg-2 col-xl-2">TIPO_DE_TRABAJO</div>
-      <div class="col-8 col-sm-8 col-md-2 col-lg-2 col-xl-2">ID DEL TRABAJO</div>
-      <div class="col-8 col-sm-8 col-md-2 col-lg-2 col-xl-2">FECHA_ENTRADA</div>
-      <div class="col-8 col-sm-8 col-md-2 col-lg-2 col-xl-2">FECHA_SALIDA</div>
-      <div class="col-48col-sm-8 col-md-2 col-lg-2 col-xl-2">MATERIALES</div>
+      <div class="col-10 col-sm-10 col-md-3 col-lg-1 col-xl-3">TIPO_DE_TRABAJO</div>
+      <div class="col-10 col-sm-10 col-md-3 col-lg-2 col-xl-2">ID DEL TRABAJO</div>
+      <div class="col-10 col-sm-8 col-md-3 col-lg-1 col-xl-2">FECHA_ENTRADA</div>
+      <div class="col-10 col-sm-8 col-md-3 col-lg-2 col-xl-1">FECHA_SALIDA</div>
     </div>
     </section>
 
@@ -116,15 +115,12 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="datosOrtodoncia">Datos Completos de Ortodoncia</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
           </div>
           <div class="modal-body">
             <app-ortodoncia [ortodoncia] ='ortodonciaVerDatos' (ortodonciaEliminar) = 'onOrtodonciaEliminar($event)'></app-ortodoncia>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
           </div>
         </div>
       </div>

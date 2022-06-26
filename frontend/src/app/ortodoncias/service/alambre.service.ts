@@ -12,7 +12,7 @@ import { AlambreImpl } from '../models/alambre-impl';
 export class AlambreService {
 
   private host: string = environment.host;
-  private urlEndPoint: string = `${this.host}alambre`;
+  private urlEndPoint: string = `${this.host}alambres`;
 
 
   constructor(

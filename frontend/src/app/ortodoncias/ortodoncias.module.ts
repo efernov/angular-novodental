@@ -35,7 +35,8 @@ import { TornilloItemComponent } from './tornillo-item/tornillo-item.component';
     OrtodonciasRoutingModule,
     CoreModule,
     HomeModule,
-    FormsModule
+    FormsModule,
+
   ],
   exports: [OrtodonciaComponent],
   providers: [AuxiliarService]

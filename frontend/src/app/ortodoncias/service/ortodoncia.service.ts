@@ -57,6 +57,7 @@ export class OrtodonciaService {
   }
 
   postOrtodoncia(ortodoncia: OrtodonciaImpl){
+    debugger;
     this.http.post(this.urlEndPoint, ortodoncia).subscribe();
   }
 

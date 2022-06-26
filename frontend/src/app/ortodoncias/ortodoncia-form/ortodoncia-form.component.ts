@@ -10,11 +10,14 @@ import { OrtodonciaService } from '../service/ortodoncia.service';
 export class OrtodonciaFormComponent implements OnInit {
   ortodoncia: OrtodonciaImpl = new OrtodonciaImpl(0, "", "", "", 0, [], "")
 
+  alambres:any[]=[];
+
   constructor(private ortodonciaService: OrtodonciaService) { }
 
   ngOnInit(): void {
   }
   create() {
+    debugger;
     this.ortodonciaService.postOrtodoncia(this.ortodoncia);
   }
 

@@ -2,7 +2,7 @@
   <h1 class="nav justify-content-center"> ALAMBRE </h1>
 </section>
 
-<form #alambreForm="ngForm">
+<form #alambreForm="ngForm" (ngSubmit)="create(alambreForm)">
   <section class="row">
     <article class="col-1"></article>
     <article class="col-2"><br>
@@ -14,7 +14,7 @@
         <button
         class="btn btn-primary"
         role="button"
-        (click)="create()"
+        type="submit"
         routerLink="/ortodoncias/formulario"
         [disabled]="!alambreForm.valid"
         >
@@ -23,44 +23,63 @@
       </div>
     </div>
     </article>
+
+
+      <!-- <p>precio.invalid && (precio.dirty || precio.touched) || precio.value ==0 ---val
+        {{precio.invalid && (precio.dirty || precio.touched) || precio.value ==0}}</p>
+
+      <p>val: {{precio.value}}</p>
+        <p>dirty: {{precio.dirty}}</p>
+        <p>touched:{{precio.touched}}</p>
+        <p>valid: {{precio.valid}}</p>
+          <p>invalid: {{precio.invalid}}</p>-->
     <article class="col-2">
-      <input type="number" class="form-control"
+      <select type="number" class="form-select"
       [(ngModel)]="alambre.precio"
       name="precio"
       required
-      min="0.1"
-      max="3.0"
+      min="0.5"
+      max="5.0"
       #precio="ngModel"
       [ngClass]="{
         'is-invalid': precio.invalid && (precio.dirty || precio.touched),
-        'is-valid': !precio.invalid}"/>
-
-          <div class="text-danger"
-            *ngIf="precio.invalid && (precio.dirty || precio.touched)">
-               <div *ngIf="precio.errors?.['required']">
+        'is-valid': !precio.invalid && precio.dirty && precio.value !=0}">
+            <option value="0">Seleccione un valor</option>
+            <option value="0.5">0.5</option>
+            <option value="1.0">1.0</option>
+            <option value="1.5">1.5</option>
+            <option value="2.0">2.0</option>
+            <option value="2.5">2.5</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <div class="text-danger"
+            *ngIf="precio.invalid && (precio.dirty || precio.touched) || (precio.value ==0 && precio.dirty)">
                     El precio del Alambre es obligatorio
-               </div>
           </div><br><br>
-
-        <input type="number" class="form-control"
+        <select type="number" class="form-select"
         [(ngModel)]="alambre.diametroMilimetro"
         name="diametroMilimetro"
         required
-        min="0.1"
-        max="3.0"
         #diametroMilimetro="ngModel"
         [ngClass]="{
           'is-invalid': diametroMilimetro.invalid && (diametroMilimetro.dirty || diametroMilimetro.touched),
-          'is-valid': !diametroMilimetro.invalid}"/>
-
+          'is-valid': !diametroMilimetro.invalid && diametroMilimetro.dirty}">
+            <option value="0">Seleccione un valor</option>
+            <option value="0.6">0.6</option>
+            <option value="0.8">0.8</option>
+            <option value="0.9">0.9</option>
+            <option value="1.0">1.0</option>
+            <option value="1.2">1.2</option>
+          </select>
           <div class="text-danger"
-          *ngIf="diametroMilimetro.invalid && (diametroMilimetro.dirty || diametroMilimetro.touched)">
-             <div *ngIf="diametroMilimetro.errors?.['required']">
-                  El diametro del Alambre es obligatorio
-             </div>
-        </div><br><br>
+            *ngIf="diametroMilimetro.invalid && (diametroMilimetro.dirty || diametroMilimetro.touched) || (diametroMilimetro.value ==0 && diametroMilimetro.dirty)">
+            El diametro del Alambre es obligatorio
+          </div>
 
-          <input type="number" class="form-control"
+        <br><br>
+
+          <select type="number" class="form-select"
           [(ngModel)]="alambre.longitudCentimetro"
           name="longitudCentimetro"
           required
@@ -69,13 +88,15 @@
           #longitudCentimetro="ngModel"
           [ngClass]="{
             'is-invalid': longitudCentimetro.invalid && (longitudCentimetro.dirty || longitudCentimetro.touched),
-            'is-valid': !longitudCentimetro.invalid}"/>
-
+            'is-valid': !longitudCentimetro.invalid && longitudCentimetro.dirty}">
+            <option value="0">Seleccione un valor</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+        </select>
         <div class="text-danger"
-          *ngIf="longitudCentimetro.invalid && (longitudCentimetro.dirty || longitudCentimetro.touched)">
-             <div *ngIf="longitudCentimetro.errors?.['required']">
-                  La longitud del Alambre es obligatorio
-             </div>
+            *ngIf="longitudCentimetro.invalid && (longitudCentimetro.dirty || longitudCentimetro.touched) || (longitudCentimetro.value ==0 && longitudCentimetro.dirty)">
+            La longitud del Alambre es obligatorio
         </div><br><br>
 
     </article>
@@ -88,35 +109,31 @@
       <p class="nav justify-content-end"> CANTIDAD = </p>
     </article>
 
+
     <article class="col-2">
-      <input type="number" class="form-control"
-      [(ngModel)]="alambre.cantidad"
-      name="cantidad"
-      required
-      min="1"
-      max="4"
-      #cantidad="ngModel"
-      [ngClass]="{
-        'is-invalid': cantidad.invalid && (cantidad.dirty || cantidad.touched),
-        'is-valid': !cantidad.invalid}"/>
-
-    <div class="text-danger"
-      *ngIf="cantidad.invalid && (cantidad.dirty || cantidad.touched)">
-         <div *ngIf="cantidad.errors?.['required']">
-              La cantidad de Alambre es obligatorio
-         </div>
-    </div><br><br><br><br><br><br><br><br><br><br>
-    <div class="nav justify-content-end">
-    <input class="btn btn-danger btn-sm" type="reset" value="Borrar">
-    </div>
-  </article>
-
-
-
-
+      <select type="number" class="form-select"
+          [(ngModel)]="alambre.cantidad"
+          name="cantidad"
+          required="required"
+          min="1"
+          max="4"
+         #cantidad="ngModel"
+          [ngClass]="{
+         'is-invalid': cantidad.invalid && (cantidad.dirty || cantidad.touched),
+          'is-valid': !cantidad.invalid && cantidad.dirty}">
+        <option value="0">Seleccione un valor</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+      <div class="text-danger"
+        *ngIf="cantidad.invalid && (cantidad.dirty || cantidad.touched) || (cantidad.value ==0 && cantidad.dirty)">
+            La cantidad de Alambre es obligatorio
+      </div><br><br><br><br><br><br><br><br><br><br>
+      <div class="nav justify-content-end">
+        <input class="btn btn-danger btn-sm" type="reset" value="Borrar">
+      </div>
+    </article>
   </section>
-
-
-
-
 </form>

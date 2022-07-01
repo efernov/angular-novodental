@@ -6,20 +6,20 @@
   <section class="row">
     <article class="col-1"></article>
     <article class="col-2"><br>
-     <p class="nav justify-content-end"> PRECIO UNIDAD = </p><br><br>
-     <p class="nav justify-content-end"> DIRECCION APERTURA = </p><br><br><br>
-     <p class="nav justify-content-end"> APERTURA = </p><br><br>
-     <div class="form-row justify-content-between pt-5">
-      <div class="col-lg-5 col-md-12">
-        <button
-        class="btn btn-primary"
-        role="button"
-        type="submit"
-        [disabled]="!tornilloForm.valid">
-        Crear Tornillo
-        </button>
+      <p class="nav justify-content-end"> PRECIO UNIDAD = </p><br><br>
+      <p class="nav justify-content-end"> DIRECCION APERTURA = </p><br><br><br>
+      <p class="nav justify-content-end"> APERTURA = </p><br><br>
+      <div class="form-row justify-content-between pt-5">
+        <div class="col-lg-5 col-md-12">
+          <button
+              class="btn btn-primary"
+              role="button"
+              [disabled]="!tornilloForm.valid">
+            <span *ngIf="_tornillo.id">Actualizar Tornillo</span>
+            <span *ngIf="!_tornillo.id">Crear Tornillo</span>
+          </button>
+        </div>
       </div>
-    </div>
     </article>
 
     <article class="col-2">
@@ -33,20 +33,21 @@
           [ngClass]="{
             'is-invalid': precio.invalid && (precio.dirty || precio.touched),
             'is-valid': !precio.invalid && precio.dirty && precio.value !=0}">
-            <option value="0">Seleccione un valor</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
-            <option value="25">25</option>
-            <option value="30">30</option>
+        <option value="0">Seleccione un valor</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+        <option value="25">25</option>
+        <option value="30">30</option>
       </select>
-          <div class="text-danger"
+
+      <div class="text-danger"
             *ngIf="precio.invalid && (precio.dirty || precio.touched) || (precio.value ==0 && precio.dirty)">
                   El precio del Tornillo es obligatorio
-          </div><br><br>
+      </div><br><br>
 
-        <select type="text" class="form-select"
+      <select class="form-select"
            [(ngModel)]="_tornillo.direccionApertura"
            name="direccionApertura"
            required
@@ -56,17 +57,18 @@
            [ngClass]="{
              'is-invalid': direccionApertura.invalid && (direccionApertura.dirty || direccionApertura.touched),
             'is-valid': !direccionApertura.invalid && direccionApertura.dirty && direccionApertura.value !=0}">
-              <option value="0">Seleccione un valor</option>
-              <option value="unidireccional">Unidireccional</option>
-              <option value="bidireccional">Bidireccional</option>
-              <option value="tridireccional">Tridireccional</option>
-        </select>
-          <div class="text-danger"
+        <option value="0">Seleccione un valor</option>
+        <option value="unidireccional">Unidireccional</option>
+        <option value="bidireccional">Bidireccional</option>
+        <option value="tridireccional">Tridireccional</option>
+      </select>
+
+      <div class="text-danger"
           *ngIf="direccionApertura.invalid && (direccionApertura.dirty || direccionApertura.touched) || (direccionApertura.value ==0 && direccionApertura.dirty)">
                            La dirección del Tornillo es obligatoria
-          </div><br><br>
+      </div><br><br>
 
-        <select type="number" class="form-select"
+      <select class="form-select"
           [(ngModel)]="_tornillo.aperturaMilimetros"
           name="aperturaMilimetros"
           required
@@ -74,20 +76,22 @@
           [ngClass]="{
             'is-invalid': aperturaMilimetros.invalid && (aperturaMilimetros.dirty || aperturaMilimetros.touched),
             'is-valid': !aperturaMilimetros.invalid && aperturaMilimetros.dirty}">
-            <option value="0">Seleccione un valor</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="12">12</option>
-            <option value="15">15</option>
-          </select>
-           <div class="text-danger"
-              *ngIf="aperturaMilimetros.invalid && (aperturaMilimetros.dirty || aperturaMilimetros.touched) || (aperturaMilimetros.value ==0 && aperturaMilimetros.dirty)">
-                   La apertura es obligatoria
-           </div><br><br>
+        <option value="0">Seleccione un valor</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="12">12</option>
+        <option value="15">15</option>
+      </select>
+
+      <div class="text-danger"
+          *ngIf="aperturaMilimetros.invalid && (aperturaMilimetros.dirty || aperturaMilimetros.touched) || (aperturaMilimetros.value ==0 && aperturaMilimetros.dirty)">
+               La apertura es obligatoria
+      </div><br><br>
 
     </article>
+
     <article class="col-1">
       <p> € </p><br>
      <img width="20" height="20" src="assets/arrow-up-solid.svg">
@@ -95,12 +99,13 @@
      <img width="30" height="30" src="assets/flecha tridireccional.png"><br><br><br>
       <p> mm </p>
     </article>
+
     <article class="col-2"><br>
       <p class="nav justify-content-end"> CANTIDAD = </p>
     </article>
 
     <article class="col-2">
-      <select type="number" class="form-select" aria-label=""
+      <select class="form-select" aria-label=""
           [(ngModel)]="_tornillo.cantidad"
           name="cantidad"
           required
@@ -110,19 +115,21 @@
           [ngClass]="{
             'is-invalid': cantidad.invalid && (cantidad.dirty || cantidad.touched),
             'is-valid': !cantidad.invalid && cantidad.dirty}">
-            <option value="0">Seleccione un valor</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
-        <div class="text-danger"
+        <option value="0">Seleccione un valor</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+
+      <div class="text-danger"
           *ngIf="cantidad.invalid && (cantidad.dirty || cantidad.touched) || (cantidad.value ==0 && cantidad.dirty)">
               La cantidad de Tornillos es obligatorio
-        </div><br><br><br><br><br><br><br><br><br><br>
-    <div class="nav justify-content-end">
-    <input class="btn btn-danger btn-sm" type="reset" value="Borrar">
-    </div>
-  </article>
+      </div><br><br><br><br><br><br><br><br><br><br>
+
+      <div class="nav justify-content-end">
+        <input *ngIf="!_tornillo.id" class="btn btn-danger btn-sm" type="reset" value="Limpiar">
+      </div>
+    </article>
   </section>
 </form>

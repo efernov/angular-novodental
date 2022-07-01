@@ -29,10 +29,12 @@ export class TornilloService {
 
   extraerTornillo(respuestaApi: any): Tornillo[] {
   const tornillos: Tornillo[] = [];
-  respuestaApi._embedded.tornillo.forEach((p: any) => {
-  tornillos.push(this.mapearTornillo(p));
+  if(respuestaApi._embedded.tornillo){
+    respuestaApi._embedded.tornillo.forEach((p: any) => {
+    tornillos.push(this.mapearTornillo(p));
 
-  });
+    });
+  }
   return tornillos;
   }
 
@@ -63,8 +65,8 @@ export class TornilloService {
     return this.http.delete<any>(url);
   }
 
-  patchTornillo(tornillo: TornilloImpl) {
-    return this.http.patch<any>(`${this.urlTornillos}/${tornillo.id}`, tornillo);
+  modificarTornillo(tornillo: TornilloImpl) {
+    return this.http.put<any>(`${this.urlTornillos}/${tornillo.id}`, tornillo);
   }
 
   getTornilloPagina(pagina: number): Observable<any> {

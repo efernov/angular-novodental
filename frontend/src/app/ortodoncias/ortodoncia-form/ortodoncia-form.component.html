@@ -21,8 +21,7 @@
               }"></textarea>
               <div
                 class="text-danger"
-              *ngIf="tipoTrabajo.invalid && (tipoTrabajo.dirty || tipoTrabajo.touched)"
-              >
+              *ngIf="tipoTrabajo.invalid && (tipoTrabajo.dirty || tipoTrabajo.touched)">
               <div *ngIf="tipoTrabajo.errors?.['required']">
                 El Tipo de Trabajo es obligatorio
               </div>
@@ -83,7 +82,7 @@
           </div>
           <div class="nav justify-content-center">
                 <label for="material">Nuevo Material: {{disabledMaterial}}</label>
-                  <select name="material" id="material" [disabled]="disabledMaterial">
+                  <select name="material" id="material" [disabled]="disabledMaterial" (click)="nuevoMaterial()">
                     <option value="alambre"  data-bs-toggle="modal" data-bs-target="#alambre">Alambre</option>
                     <option value="tornillo" data-bs-toggle="modal" data-bs-target="#tornillo">Tornillo</option>
                   </select>
@@ -109,14 +108,13 @@
                     <td>{{material.cantidad}}</td>
                     <td>{{material.precio}}</td>
                     <td>
-                      <button (click)="editarMaterial(material)" *ngIf="material.urlAlambre" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#alambre">Editar</button>
-                      <button (click)="editarMaterial(material)" *ngIf="material.urlTornillo" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#tornillo">Editar</button>
+                      <button (click)="editarMaterial(material)" *ngIf="material.urlAlambre" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#alambre">Editar <fa-icon [icon] = "faPencil"></fa-icon></button>
+                      <button (click)="editarMaterial(material)" *ngIf="material.urlTornillo" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#tornillo">Editar <fa-icon [icon] = "faPencil"></fa-icon></button>
                     </td>
                     <td>
-                        <button class="btn btn-danger" (click)="eliminarMaterial(material.id)">Borrar</button>
+                        <button class="btn btn-danger" (click)="eliminarMaterial(material.id)">Borrar<fa-icon [icon] = "faBasura"></fa-icon></button>
                     </td>
                   </tr>
-
                 </tbody>
               </table>
            </div>
@@ -128,28 +126,10 @@
                   type="text"
                   class="form-control"
                   [(ngModel)]="ortodoncia.importeOrtodoncia"
-                  placeholder="Introduzca el Importe total"
+                  readonly="readonly"
                   name="importe"
-                  required
-                  minlength="2"
-                  maxlength="3"
                   #importe="ngModel"
-                  [ngClass]="{
-                    'is-invalid': importe.invalid && (importe.dirty || importe.touched),
-                    'is-valid': !importe.invalid
-                  }"
                 />
-                <div
-                  class="text-danger"
-                  *ngIf="importe.invalid && (importe.dirty || importe.touched)"
-                  >
-                  <div *ngIf="importe.errors?.['required']">
-                    El Importe de la Ortodoncia es obligatorio
-                  </div>
-                  <div *ngIf="importe.errors?.['minlength']">
-                    El Importe debe tener al menos 2 caracteres
-                  </div>
-                </div>
               </div>
             </div>
             <div class="container">
@@ -157,14 +137,12 @@
               <div class="form-row justify-content-between pt-5">
                 <div class="col-lg-5 col-md-12">
                   <button
-                  class="btn btn-primary"
-                  role="button"
-                  (click)="create()"
-                  [disabled]="!ortodonciaForm.valid"
-                  >
-
-                  <span *ngIf="ortodonciaId != '-1'">Actualizar ortodoncia</span>
-                  <span *ngIf="ortodonciaId =='-1'">Crear ortodoncia</span>
+                      class="btn btn-primary"
+                      role="button"
+                      (click)="create()"
+                      [disabled]="!ortodonciaForm.valid">
+                    <span *ngIf="ortodonciaId != '-1'">Actualizar ortodoncia</span>
+                    <span *ngIf="ortodonciaId =='-1'">Crear ortodoncia</span>
                   </button>
                 </div>
               </div>
@@ -188,7 +166,9 @@
           <div class="row align-items-end">
             <div class="col">
               <div class="nav justify-content-start">
-                <input class="btn btn-danger btn-sm" type="reset" (click)="reset()" value="Borrar">
+                <a [routerLink]="['/ortodoncias/formulario']" routerLinkActive="router-link-active">
+                  <input class="btn btn-danger btn-sm" type="reset" (click)="reset()" value="Limpiar formulario">
+                </a>
               </div>
             </div>
           </div>

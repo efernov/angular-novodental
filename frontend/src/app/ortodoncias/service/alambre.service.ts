@@ -29,12 +29,13 @@ export class AlambreService {
     }
 
   extraerAlambre(respuestaApi: any): Alambre[] {
-  const alambres: Alambre[] = [];
-  respuestaApi._embedded.alambres.forEach((p: any) => {
-  alambres.push(this.mapearAlambre(p));
-
-  });
-  return alambres;
+    const alambres: Alambre[] = [];
+    if(respuestaApi._embedded.alambres){
+      respuestaApi._embedded.alambres.forEach((p: any) => {
+        alambres.push(this.mapearAlambre(p));
+      });
+    }
+    return alambres;
   }
 
   mapearAlambre(alambreApi: any): AlambreImpl {
@@ -64,8 +65,8 @@ debugger;
     return this.http.delete<any>(url);
   }
 
-  patchAlambre(alambre: AlambreImpl) {
-    return this.http.patch<any>(`${this.urlAlambres}/${alambre.id}`, alambre);
+  modificarAlambre(alambre: AlambreImpl) {
+    return this.http.put<any>(`${this.urlAlambres}/${alambre.id}`, alambre);
   }
 
   getAlambresPagina(pagina: number): Observable<any> {

@@ -12,6 +12,7 @@ import { TornilloService } from '../service/tornillo.service';
 export class TornilloComponent implements OnInit {
   _tornillo: TornilloImpl = new TornilloImpl(0, 0, 0, "", 0, "", "");
   mensaje:string = "";
+  tornilloId: string = "";
 
 @Output()
 tornilloEvent = new EventEmitter<TornilloImpl>();
@@ -33,6 +34,8 @@ tornilloEvent = new EventEmitter<TornilloImpl>();
     debugger;
     if(tornillo && tornillo.urlTornillo){
       this._tornillo = tornillo;
+    }else{
+      this._tornillo = new TornilloImpl(0, 0, 0, "", 0, "", "");
     }
   }
 
@@ -52,8 +55,6 @@ tornilloEvent = new EventEmitter<TornilloImpl>();
           }else{
             this.router.navigate(['ortodoncias/formulario']);
           }
-
-
         },
         (error) => {
           console.error(error);

@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
+import { faPencil, faRuble, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { MaterialService } from 'src/app/materiales/service/material.service';
 import { OrtodonciaImpl } from '../models/ortodoncia-impl';
 import { AlambreService } from '../service/alambre.service';
@@ -17,6 +19,8 @@ export class OrtodonciaFormComponent implements OnInit {
   materiales:any[]=[];
   ortodonciaId:string='';
   materialSeleccionado:any;
+  faPencil = faPencil;
+  faBasura = faTrashCan;
   @ViewChild('closeTornillo', { static: false }) btCloseTornillo: ElementRef | undefined;
   @ViewChild('closeAlambre', { static: false }) btCloseAlambre: ElementRef | undefined;
 
@@ -104,7 +108,7 @@ export class OrtodonciaFormComponent implements OnInit {
         debugger;
         let precioTotal =0;
         this.materiales.forEach(m => {
-          precioTotal+=m.precio;
+          precioTotal+=m.precio * m.cantidad;
         });
         this.ortodoncia.importeOrtodoncia = precioTotal;
       },
@@ -117,8 +121,13 @@ export class OrtodonciaFormComponent implements OnInit {
     this.materialSeleccionado = material;
   }
 
+  nuevoMaterial(){
+    this.materialSeleccionado = undefined;
+  }
+
   reset(){
     this.materiales = [];
+
   }
 
 }

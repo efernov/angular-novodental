@@ -12,6 +12,7 @@ import { AlambreService } from '../service/alambre.service';
 export class AlambreComponent implements OnInit {
   _alambre: AlambreImpl = new AlambreImpl(0, 0, 0, 0, 0, "", "");
   mensaje:string = '';
+  alambreId : string = "";
 
   @Output()
   alambreEvent = new EventEmitter<AlambreImpl>();
@@ -31,6 +32,8 @@ export class AlambreComponent implements OnInit {
     debugger;
     if(alambre && alambre.urlAlambre){
       this._alambre = alambre;
+    }else{
+      this._alambre = new AlambreImpl(0, 0, 0,  0, 0, "", "");
     }
   }
 
@@ -42,6 +45,7 @@ export class AlambreComponent implements OnInit {
 
       this.alambreService.postAlambre(this._alambre).subscribe(
         (response) =>{
+          debugger;
           this.alambreEvent.emit(this.alambreService.mapearAlambre(response));
 
           if(this.ortodonciaId){

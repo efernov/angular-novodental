@@ -14,6 +14,7 @@ import { AlambreComponent } from './alambre/alambre.component';
 import { TornilloComponent } from './tornillo/tornillo.component';
 import { AlambreItemComponent } from './alambre-item/alambre-item.component';
 import { TornilloItemComponent } from './tornillo-item/tornillo-item.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -36,7 +37,7 @@ import { TornilloItemComponent } from './tornillo-item/tornillo-item.component';
     CoreModule,
     HomeModule,
     FormsModule,
-
+    FontAwesomeModule,
   ],
   exports: [OrtodonciaComponent],
   providers: [AuxiliarService]

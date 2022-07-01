@@ -18,24 +18,29 @@ export class MaterialService {
     private http: HttpClient,
     private auxService: AuxiliarService) { }
 
-/* getMateriales(): Observable<Material[]> {
-    debugger;
-  return this.http.get<Material[]>(this.urlEndPoint+'/findall');
-  } */
+
   getMateriales(): Observable<any> {
     return this.http.get<any>(this.urlEndPoint);
     }
 
+    findById(id:string): Observable<any> {
+      return this.http.get<any>(`${this.urlEndPoint}/${id}` );
+    }
+
   extraerMateriales(respuestaApi: any): Material[] {
     const materiales: Material[] = [];
+    if(respuestaApi._embedded.alambres){
     respuestaApi._embedded.alambres.forEach((a: any) => {
       materiales.push(this.mapearMaterial(a, 'alambre'));
       debugger;
     });
+  }
+  if(respuestaApi._embedded.tornillo){
     respuestaApi._embedded.tornillo.forEach((t: any) => {
       materiales.push(this.mapearMaterial(t, 'tornillo'));
       debugger;
     });
+  }
     return materiales;
   }
 
@@ -58,6 +63,9 @@ export class MaterialService {
     id,
   materialApi.precio,
   materialApi.cantidad,
+  // materialApi.diametroMilimetro,
+  // materialApi.longitudCentimetro,
+  // materialApi.direccionApertura,
   urlAlambre,
   urlTornillo,
   materialApi.ortodoncia,);
@@ -81,13 +89,8 @@ export class MaterialService {
     return this.http.delete<any>(url);
   }
 
-  patchMaterial(material: MaterialImpl) {
-    return this.http.patch<any>(`${this.urlEndPoint}/${material.id}`, material);
+  modificarMaterial(material: MaterialImpl) {
+    return this.http.put<any>(`${this.urlEndPoint}/${material.id}`, material);
   }
-
-  getMaterialPagina(pagina: number): Observable<any> {
-  return this.auxService.getItemsPorPagina(this.urlEndPoint, pagina);
-  }
-
 
 }

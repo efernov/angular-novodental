@@ -19,10 +19,7 @@ export class OrtodonciaService {
   private http: HttpClient,
   private auxService: AuxiliarService) { }
 
-  /* getOrtodoncias(): Observable<Ortodoncia[]> {
-    debugger;
-  return this.http.get<Ortodoncia[]>(this.urlEndPoint+'/findall');
-  } */
+
   getOrtodoncias(): Observable<any> {
     return this.http.get<any>(this.urlEndPoint);
     }

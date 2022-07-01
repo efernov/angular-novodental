@@ -1,1 +1,20 @@
 <p>material-item works!</p>
+
+<div class="row mb-2">
+  <hr class='w-100'>
+  <div class="col-10 col-sm-10 col-md-3 col-lg-3 col-xl-3">
+    <a class="" data-bs-toggle="modal"   data-bs-target="#modalOrtodoncia" (click)='materialSeleccionado.emit(material)'>
+      <span *ngIf="material.urlTornillo">Tornillo</span>
+      <span *ngIf="material.urlAlambre">Alambre</span>
+    </a>
+  </div>
+  <div class="col-10 col-sm-10 col-md-3 col-lg-2 col-xl-2">{{material.id}}</div>
+  <div class="col-10 col-sm-10 col-md-3 col-lg-2 col-xl-2">{{material.precio}}</div>
+  <div class="col-10 col-sm-10 col-md-3 col-lg-3 col-xl-3">{{material.diametroMilimetro}}</div>
+  <div class="col-10 col-sm-10 col-md-3 col-lg-3 col-xl-3">{{material.longitudCentimetro}}</div>
+  <div class="col-10 col-sm-10 col-md-3 col-lg-3 col-xl-3">{{material.direccionApertura}}</div>
+  <div class="col-10 col-sm-10 col-md-3 col-lg-3 col-xl-3">{{material.aperturaMilimetro}}</div>
+
+  <div class="col-10 col-sm-10 col-md-2 col-lg-2 col-xl-2">
+  </div>
+</div>

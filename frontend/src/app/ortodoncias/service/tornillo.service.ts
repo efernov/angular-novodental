@@ -12,7 +12,8 @@ import { TornilloImpl } from '../models/tornillo-impl';
 export class TornilloService {
 
   private host: string = environment.host;
-  private urlEndPoint: string = `${this.host}tornillo`;
+  private urlTornillos: string = `${this.host}tornillos`;
+  private urlOrtodoncia: string = `${this.host}ortodoncia/`;
 
   constructor(
   private http: HttpClient,
@@ -23,12 +24,12 @@ export class TornilloService {
   return this.http.get<Tornillo[]>(this.urlEndPoint+'/findall');
   } */
   getTornillo(): Observable<any> {
-    return this.http.get<any>(this.urlEndPoint);
+    return this.http.get<any>(this.urlTornillos);
     }
 
   extraerTornillo(respuestaApi: any): Tornillo[] {
   const tornillos: Tornillo[] = [];
-  respuestaApi._embedded.tornillos.forEach((p: any) => {
+  respuestaApi._embedded.tornillo.forEach((p: any) => {
   tornillos.push(this.mapearTornillo(p));
 
   });
@@ -37,7 +38,6 @@ export class TornilloService {
 
   mapearTornillo(tornilloApi: any): TornilloImpl {
     const urlSelf = tornilloApi._links.self.href;
-    console.log(urlSelf);
     const url = urlSelf.split('/');
 	  const id =   parseInt(url[url.length -1]);
 
@@ -47,29 +47,28 @@ export class TornilloService {
   tornilloApi.aperturaMilimetros,
   tornilloApi.direccionApertura,
   tornilloApi.cantidad,
-  tornilloApi.urlTornillo);
+  tornilloApi._links.tornillo.href,
+  tornilloApi._links.ortodoncia.href);
   }
 
-  create(tornillo: Tornillo): void {
-  console.log(`Se ha creado un Tornillo: ${JSON.stringify(tornillo)}`);
-  }
-
-  postTornillo(tornillo: TornilloImpl){
-    this.http.post(this.urlEndPoint, tornillo).subscribe();
+  postTornillo(tornillo: TornilloImpl): Observable<any> {
+    debugger;
+    tornillo.ortodoncia = this.urlOrtodoncia + tornillo.ortodoncia;
+    return this.http.post<any>(this.urlTornillos, tornillo);
   }
 
   deleteTornillo(id: number):Observable<any> {
-    const url = `${this.urlEndPoint}/${id}`;
+    const url = `${this.urlTornillos}/${id}`;
     debugger;
     return this.http.delete<any>(url);
   }
 
   patchTornillo(tornillo: TornilloImpl) {
-    return this.http.patch<any>(`${this.urlEndPoint}/${tornillo.id}`, tornillo);
+    return this.http.patch<any>(`${this.urlTornillos}/${tornillo.id}`, tornillo);
   }
 
   getTornilloPagina(pagina: number): Observable<any> {
-  return this.auxService.getItemsPorPagina(this.urlEndPoint, pagina);
+  return this.auxService.getItemsPorPagina(this.urlTornillos, pagina);
   }
 
 }

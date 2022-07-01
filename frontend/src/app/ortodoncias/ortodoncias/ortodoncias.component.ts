@@ -12,7 +12,7 @@ import { OrtodonciaService } from '../service/ortodoncia.service';
 export class OrtodonciasComponent implements OnInit {
   ortodoncias: Ortodoncia[] = [];
   todasOrtodoncias: Ortodoncia[] = [];
-  ortodonciaVerDatos: Ortodoncia = new OrtodonciaImpl(0, "", "", "", 0, [], "");
+  ortodonciaVerDatos: Ortodoncia = new OrtodonciaImpl(0, '', '', '', 0, [], '', '');
   numPaginas: number = 0;
 
   constructor(
@@ -21,49 +21,29 @@ export class OrtodonciasComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.ortodonciaService.getOrtodoncias().subscribe((response) =>
-    this.ortodoncias = this.ortodonciaService.extraerOrtodoncias(response));
     this.getTodasOrtodoncias();
-  /* this.ortodonciaService.getOrtodoncias().subscribe(
-    (lstOrtodoncia) =>{
-      debugger;
-    this.ortodoncias =lstOrtodoncia;
-    this.ortodonciaService.extraerOrtodoncias(response));
-    this.getTodasOrtodoncias();
-  }); */
   }
 
   verDatos(ortodoncia: Ortodoncia): void {
     this.ortodonciaVerDatos = ortodoncia;
   }
 
-  onOrtodonciaEliminar(ortodoncia: Ortodoncia): void {
+  ortodonciaEliminar(ortodoncia: Ortodoncia): void {
     debugger;
     console.log(`He eliminado a ${ortodoncia.id}`);
     this.ortodonciaService.deleteOrtodoncia(ortodoncia.id).subscribe(
-      () => { console.log('ortodoncia eliminado');},
+      () => {
+        debugger;
+        this.getTodasOrtodoncias();
+      },
       (error) => {console.error(error);}
     )
     this.ortodoncias = this.ortodoncias.filter(u => ortodoncia !== u);
   }
 
   getTodasOrtodoncias(): void {
-    this.ortodonciaService.getOrtodoncias().subscribe((r) => {
-      this.numPaginas = this.auxService.getPaginasResponse(r);
-      for (let index = 1; index <= this.numPaginas; index++) {
-        this.ortodonciaService.getOrtodonciasPagina(index).subscribe(response => {
-          this.todasOrtodoncias.push(
-            ...this.ortodonciaService.extraerOrtodoncias(response)
-          );
-        });
-      }
-    });
-  }
-  borrarOrtodoncia(id: number): void {
-    this.ortodonciaService.deleteOrtodoncia(id);
+    this.ortodonciaService.getOrtodoncias().subscribe((response) =>
+    this.ortodoncias = this.ortodonciaService.extraerOrtodoncias(response));
   }
 
-  modificarOrtodoncia(ortodoncia: OrtodonciaImpl): void {
-    this.ortodonciaService.patchOrtodoncia(ortodoncia).subscribe();
-  }
 }

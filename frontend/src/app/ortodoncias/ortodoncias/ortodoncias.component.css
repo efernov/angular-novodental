@@ -1,3 +1,7 @@
 form {
   padding-top: 0;
 }
+div.row {
+  margin-left: 20px;
+  align-items: center;
+}

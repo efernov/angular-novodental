@@ -12,7 +12,8 @@ import { AlambreImpl } from '../models/alambre-impl';
 export class AlambreService {
 
   private host: string = environment.host;
-  private urlEndPoint: string = `${this.host}alambres`;
+  private urlAlambres: string = `${this.host}alambres`;
+  private urlOrtodoncia: string = `${this.host}ortodoncia/`;
 
 
   constructor(
@@ -24,7 +25,7 @@ export class AlambreService {
   return this.http.get<Alambre[]>(this.urlEndPoint+'/findall');
   } */
   getAlambre(): Observable<any> {
-    return this.http.get<any>(this.urlEndPoint);
+    return this.http.get<any>(this.urlAlambres);
     }
 
   extraerAlambre(respuestaApi: any): Alambre[] {
@@ -38,42 +39,37 @@ export class AlambreService {
 
   mapearAlambre(alambreApi: any): AlambreImpl {
     const urlSelf = alambreApi._links.self.href;
-    console.log(urlSelf);
     const url = urlSelf.split('/');
 	  const id =   parseInt(url[url.length -1]);
-
+debugger;
   return new AlambreImpl(
     id,
   alambreApi.precio,
   alambreApi.diametroMilimetro,
   alambreApi.longitudCentimetro,
   alambreApi.cantidad,
-  alambreApi.urlAlambre);
+  alambreApi._links.alambre.href,
+  alambreApi._links.ortodoncia.href);
   }
 
-  create(alambre: Alambre): void {
-  console.log(`Se ha creado un Alambre: ${JSON.stringify(alambre)}`);
-  }
-
-  postAlambre(alambre: AlambreImpl){
-    this.http.post(this.urlEndPoint, alambre).subscribe();
+  postAlambre(alambre: AlambreImpl): Observable<any>{
+    debugger;
+    alambre.ortodoncia=  this.urlOrtodoncia+alambre.ortodoncia;
+    return this.http.post<any>(this.urlAlambres, alambre);
   }
 
   deleteAlambre(id: number):Observable<any> {
-    const url = `${this.urlEndPoint}/${id}`;
+    const url = `${this.urlAlambres}/${id}`;
     debugger;
     return this.http.delete<any>(url);
   }
 
   patchAlambre(alambre: AlambreImpl) {
-    return this.http.patch<any>(`${this.urlEndPoint}/${alambre.id}`, alambre);
+    return this.http.patch<any>(`${this.urlAlambres}/${alambre.id}`, alambre);
   }
 
   getAlambresPagina(pagina: number): Observable<any> {
-  return this.auxService.getItemsPorPagina(this.urlEndPoint, pagina);
+  return this.auxService.getItemsPorPagina(this.urlAlambres, pagina);
   }
-
-
-
 
 }

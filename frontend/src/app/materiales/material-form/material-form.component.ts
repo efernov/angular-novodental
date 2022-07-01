@@ -11,7 +11,7 @@ import { MaterialImpl } from '../models/material-impl';
   styleUrls: ['./material-form.component.css']
 })
 export class MaterialFormComponent implements OnInit {
-  public material: MaterialImpl = new MaterialImpl(0, 0, "", "");
+  public material: MaterialImpl = new MaterialImpl(0, 0,0, "", "", '');
   public materialForm: FormGroup;
   private host: string = environment.host;
   public urlEndPoint: string = `${this.host}ortodoncias`;

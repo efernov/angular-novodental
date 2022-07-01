@@ -34,7 +34,7 @@
             <article class="col">
               <div class="nav justify-content-center">
                 <div class="flex-column">
-                  <p>  ID Trabajo:  <input type="text" name="ID Trabajo" size="30"></p>
+                  <p>  ID Trabajo:  <input type="text" name="ID Trabajo" size="30" #id="ngModel" [(ngModel)]="ortodoncia.id" readonly="readonly"></p>
                   <label>Fecha Entrada Ortodoncia<sup class="text-danger">*</sup></label>
                   <input
                     type="date"
@@ -81,19 +81,17 @@
               </div>
             </article>
           </div>
+          <div class="nav justify-content-center">
+                <label for="material">Nuevo Material: {{disabledMaterial}}</label>
+                  <select name="material" id="material" [disabled]="disabledMaterial">
+                    <option value="alambre"  data-bs-toggle="modal" data-bs-target="#alambre">Alambre</option>
+                    <option value="tornillo" data-bs-toggle="modal" data-bs-target="#tornillo">Tornillo</option>
+                  </select>
+               <span class="nav align-content-center">MATERIALES NECESARIOS</span>
+          </div>
            <div class="row">
               <table class="table table-bordered">
                 <thead>
-                  <tr>
-                    <th class="nav justify-content-center">
-                      <label for="material">Nuevo Material:</label>
-                        <select name="material" id="material">
-                          <option value="alambre"  data-bs-toggle="modal" data-bs-target="#alambre">Alambre</option>
-                          <option value="tornillo" data-bs-toggle="modal" data-bs-target="#tornillo">Tornillo</option>
-                        </select>
-                     <span class="nav align-content-center">MATERIALES NECESARIOS</span>
-                    </th>
-                  </tr>
                   <tr>
                     <th scope="col">DESCRIPCION</th>
                     <th scope="col">Cantidad</th>
@@ -103,34 +101,22 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                  <tr *ngFor = "let material of materiales">
+                    <td>
+                      <span *ngIf="material.urlAlambre">alambre</span>
+                      <span *ngIf="material.urlTornillo">tornillo</span>
+                    </td>
+                    <td>{{material.cantidad}}</td>
+                    <td>{{material.precio}}</td>
+                    <td>
+                      <button (click)="editarMaterial(material)" *ngIf="material.urlAlambre" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#alambre">Editar</button>
+                      <button (click)="editarMaterial(material)" *ngIf="material.urlTornillo" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#tornillo">Editar</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" (click)="eliminarMaterial(material.id)">Borrar</button>
+                    </td>
                   </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+
                 </tbody>
               </table>
            </div>
@@ -166,17 +152,33 @@
                 </div>
               </div>
             </div>
-            <div class="form-row justify-content-between pt-5">
-              <div class="col-lg-5 col-md-12">
-                <button
-                class="btn btn-primary"
-                role="button"
-                (click)="create()"
-                routerLink="/ortodoncias"
-                [disabled]="!ortodonciaForm.valid"
-                >
-                Crear Ortodoncia
-                </button>
+            <div class="container">
+
+              <div class="form-row justify-content-between pt-5">
+                <div class="col-lg-5 col-md-12">
+                  <button
+                  class="btn btn-primary"
+                  role="button"
+                  (click)="create()"
+                  [disabled]="!ortodonciaForm.valid"
+                  >
+
+                  <span *ngIf="ortodonciaId != '-1'">Actualizar ortodoncia</span>
+                  <span *ngIf="ortodonciaId =='-1'">Crear ortodoncia</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-row justify-content-between pt-5">
+                <div class="col-lg-5 col-md-12">
+                  <button type="button"
+                  class="btn btn-primary"
+                  role="button"
+                  routerLink="/ortodoncias"
+                  >
+                    Listar Ortodoncias
+                  </button>
+                </div>
               </div>
             </div>
     </article>
@@ -186,13 +188,8 @@
           <div class="row align-items-end">
             <div class="col">
               <div class="nav justify-content-start">
-                <input class="btn btn-danger btn-sm" type="reset" value="Borrar">
+                <input class="btn btn-danger btn-sm" type="reset" (click)="reset()" value="Borrar">
               </div>
-            </div>
-            <div class="col">
-              <article class="nav justify-content-end">
-                <input type="submit" class="btn btn-success btn-sm" value="Aceptar">
-              </article>
             </div>
           </div>
     </article>
@@ -205,15 +202,11 @@
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalLabelAlambre">ALAMBRE</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="modalLabelAlambre"></h5>
+        <button #closeAlambre type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
       </div>
       <div class="modal-body">
-        <app-alambre></app-alambre>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <app-alambre [ortodonciaId]="ortodoncia.id" [alambre]="materialSeleccionado" (alambreEvent)="incluirMaterial($event)"></app-alambre>
       </div>
     </div>
   </div>
@@ -224,15 +217,11 @@
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalLabelTornillo">TORNILLO</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="modalLabelTornillo"></h5>
+        <button #closeTornillo type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
       </div>
       <div class="modal-body">
-        <app-tornillo></app-tornillo>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <app-tornillo [ortodonciaId]="ortodoncia.id"  [tornillo]="materialSeleccionado" (tornilloEvent)="incluirMaterial($event)"></app-tornillo>
       </div>
     </div>
   </div>

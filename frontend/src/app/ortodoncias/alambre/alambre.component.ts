@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AlambreImpl } from '../models/alambre-impl';
 import { AlambreService } from '../service/alambre.service';
 
@@ -9,18 +10,51 @@ import { AlambreService } from '../service/alambre.service';
   styleUrls: ['./alambre.component.css']
 })
 export class AlambreComponent implements OnInit {
-  alambre: AlambreImpl = new AlambreImpl(0, 0, 0, 0, 0, "");
+  _alambre: AlambreImpl = new AlambreImpl(0, 0, 0, 0, 0, "", "");
   mensaje:string = '';
-  constructor(private alambreService: AlambreService) { }
+
+  @Output()
+  alambreEvent = new EventEmitter<AlambreImpl>();
+
+  @Input() ortodonciaId: number = 0;
+
+  constructor(
+    private alambreService: AlambreService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    console.log(this.ortodonciaId);
+  }
+
+  @Input('alambre')
+  set alambre(alambre: any) {
+    debugger;
+    if(alambre && alambre.urlAlambre){
+      this._alambre = alambre;
+    }
   }
 
   create(f: NgForm) {
     debugger;
     if(f.valid && f.value.cantidad !==0 && f.value.precio !== 0 && f.value.diametroMilimetro !== 0 && f.value.logitudCentimetro !== 0){
       //servicio de back
-      this.alambreService.postAlambre(this.alambre);
+      this._alambre.ortodoncia =this.ortodonciaId.toString();
+
+      this.alambreService.postAlambre(this._alambre).subscribe(
+        (response) =>{
+          this.alambreEvent.emit(this.alambreService.mapearAlambre(response));
+
+          if(this.ortodonciaId){
+            this.router.navigate([`ortodoncias/formulario/${this.ortodonciaId}`]);
+          }else{
+            this.router.navigate(['ortodoncias/formulario']);
+          }
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+
     }else{
       console.log('datos no valido, revise el formulario');
     }

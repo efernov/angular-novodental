@@ -8,4 +8,5 @@ export interface Ortodoncia {
   importeOrtodoncia: number;
   materiales: any[];
   urlOrtodoncia: string;
+  urlMaterial: string;
 }

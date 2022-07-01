@@ -15,9 +15,7 @@
         class="btn btn-primary"
         role="button"
         type="submit"
-        routerLink="/ortodoncias/formulario"
-        [disabled]="!alambreForm.valid"
-        >
+        [disabled]="!alambreForm.valid">
         Crear Alambre
         </button>
       </div>
@@ -34,8 +32,8 @@
         <p>valid: {{precio.valid}}</p>
           <p>invalid: {{precio.invalid}}</p>-->
     <article class="col-2">
-      <select type="number" class="form-select"
-      [(ngModel)]="alambre.precio"
+      <select class="form-select"
+      [(ngModel)]="_alambre.precio"
       name="precio"
       required
       min="0.5"
@@ -46,9 +44,9 @@
         'is-valid': !precio.invalid && precio.dirty && precio.value !=0}">
             <option value="0">Seleccione un valor</option>
             <option value="0.5">0.5</option>
-            <option value="1.0">1.0</option>
+            <option value="1">1</option>
             <option value="1.5">1.5</option>
-            <option value="2.0">2.0</option>
+            <option value="2">2</option>
             <option value="2.5">2.5</option>
             <option value="3">3</option>
             <option value="4">4</option>
@@ -58,7 +56,7 @@
                     El precio del Alambre es obligatorio
           </div><br><br>
         <select type="number" class="form-select"
-        [(ngModel)]="alambre.diametroMilimetro"
+        [(ngModel)]="_alambre.diametroMilimetro"
         name="diametroMilimetro"
         required
         #diametroMilimetro="ngModel"
@@ -80,7 +78,7 @@
         <br><br>
 
           <select type="number" class="form-select"
-          [(ngModel)]="alambre.longitudCentimetro"
+          [(ngModel)]="_alambre.longitudCentimetro"
           name="longitudCentimetro"
           required
           min="1"
@@ -112,7 +110,7 @@
 
     <article class="col-2">
       <select type="number" class="form-select"
-          [(ngModel)]="alambre.cantidad"
+          [(ngModel)]="_alambre.cantidad"
           name="cantidad"
           required="required"
           min="1"

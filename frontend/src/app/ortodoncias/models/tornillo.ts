@@ -5,4 +5,5 @@ export interface Tornillo {
   direccionApertura: string;
   cantidad: number;
   urlTornillo: string;
+  ortodoncia: string;
 }

@@ -16,6 +16,10 @@ const routes: Routes = [
     component: OrtodonciaFormComponent
   },
   {
+    path: "formulario/:id",
+    component: OrtodonciaFormComponent
+  },
+  {
     path: "tornillo",
     component: TornilloComponent
   },

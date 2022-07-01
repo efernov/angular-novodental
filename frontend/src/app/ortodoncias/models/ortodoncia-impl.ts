@@ -8,8 +8,16 @@ export class OrtodonciaImpl implements Ortodoncia {
   importeOrtodoncia: number = 0;
   materiales: any = [];
   urlOrtodoncia: string = "";
+  urlMaterial: string ='';
 
-  constructor (id:number, tipoTrabajo:string, fechaSalida:string, fechaEntrada:string, importeOrtodoncia:number, materiales:any[], urlOrtodoncia:string) {
+  constructor (id:number,
+    tipoTrabajo:string,
+    fechaSalida:string,
+    fechaEntrada:string,
+     importeOrtodoncia:number,
+     materiales:any[],
+    urlOrtodoncia:string,
+    urlMaterial:string) {
     this.id = id;
     this.tipoTrabajo = tipoTrabajo;
     this.fechaEntrada = fechaEntrada;
@@ -17,6 +25,7 @@ export class OrtodonciaImpl implements Ortodoncia {
     this.importeOrtodoncia = importeOrtodoncia;
     this.materiales = materiales;
     this.urlOrtodoncia = urlOrtodoncia;
+    this.urlMaterial = urlMaterial;
   }
 
 

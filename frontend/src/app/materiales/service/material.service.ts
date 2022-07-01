@@ -27,37 +27,55 @@ export class MaterialService {
     }
 
   extraerMateriales(respuestaApi: any): Material[] {
-  const materiales: Material[] = [];
-  respuestaApi._embedded.material.forEach((p: any) => {
-  materiales.push(this.mapearMaterial(p));
-
-  });
-  return materiales;
+    const materiales: Material[] = [];
+    respuestaApi._embedded.alambres.forEach((a: any) => {
+      materiales.push(this.mapearMaterial(a, 'alambre'));
+      debugger;
+    });
+    respuestaApi._embedded.tornillo.forEach((t: any) => {
+      materiales.push(this.mapearMaterial(t, 'tornillo'));
+      debugger;
+    });
+    return materiales;
   }
 
-  mapearMaterial(materialApi: any): MaterialImpl {
+  mapearMaterial(materialApi: any, tipo:string): MaterialImpl {
     const urlSelf = materialApi._links.self.href;
     console.log(urlSelf);
     const url = urlSelf.split('/');
 	  const id =   parseInt(url[url.length -1]);
+    debugger;
+    let urlTornillo = '';
+    let urlAlambre = '';
+    if(tipo === 'tornillo'){
+      urlTornillo = `${this.host}tornillo/${id}`;
+    }else{
+      urlAlambre = `${this.host}alambre/${id}`;
+    }
+
 
   return new MaterialImpl(
     id,
   materialApi.precio,
-  materialApi.ortodoncia,
-  materialApi.urlMaterial,
-  materialApi.tipoMaterial);
+  materialApi.cantidad,
+  urlAlambre,
+  urlTornillo,
+  materialApi.ortodoncia,);
   }
 
   create(material: Material): void {
   console.log(`Se ha creado el Material: ${JSON.stringify(material)}`);
   }
 
+  findMateriaByOrtodoncia(urlMaterial:string):Observable<any> {
+    return this.http.get<any>(urlMaterial);
+  }
+
   postOrtodoncia(material: MaterialImpl){
     this.http.post(this.urlEndPoint, material).subscribe();
   }
 
-  deleteMaterial(id: number):Observable<any> {
+  deleteMaterial(id: string):Observable<any> {
     const url = `${this.urlEndPoint}/${id}`;
     debugger;
     return this.http.delete<any>(url);

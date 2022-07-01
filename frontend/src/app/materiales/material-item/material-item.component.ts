@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
 import { MaterialImpl } from '../models/material-impl';
 
 @Component({
@@ -7,7 +8,8 @@ import { MaterialImpl } from '../models/material-impl';
   styleUrls: ['./material-item.component.css']
 })
 export class MaterialItemComponent implements OnInit {
-  @Input() material: MaterialImpl = new MaterialImpl(0, 0, "", "");
+  @Input() material: MaterialImpl = new MaterialImpl(0, 0, 0, '', '', '');
+  @Output() materialSeleccionado = new EventEmitter<MaterialImpl>();
 
   constructor() { }
 

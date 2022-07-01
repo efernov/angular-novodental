@@ -5,4 +5,5 @@ export interface Alambre {
   longitudCentimetro: number;
   cantidad: number;
   urlAlambre: string;
+  ortodoncia: string;
 }

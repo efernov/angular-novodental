@@ -15,16 +15,16 @@
         class="btn btn-primary"
         role="button"
         type="submit"
-        routerLink="/ortodoncias/formulario"
         [disabled]="!tornilloForm.valid">
         Crear Tornillo
         </button>
       </div>
     </div>
     </article>
+
     <article class="col-2">
-      <select type="number" class="form-select"
-          [(ngModel)]="tornillo.precio"
+      <select class="form-select"
+          [(ngModel)]="_tornillo.precio"
            name="precio"
           required
           min="5"
@@ -47,7 +47,7 @@
           </div><br><br>
 
         <select type="text" class="form-select"
-           [(ngModel)]="tornillo.direccionApertura"
+           [(ngModel)]="_tornillo.direccionApertura"
            name="direccionApertura"
            required
            minlength="10"
@@ -67,7 +67,7 @@
           </div><br><br>
 
         <select type="number" class="form-select"
-          [(ngModel)]="tornillo.aperturaMilimetros"
+          [(ngModel)]="_tornillo.aperturaMilimetros"
           name="aperturaMilimetros"
           required
           #aperturaMilimetros="ngModel"
@@ -101,7 +101,7 @@
 
     <article class="col-2">
       <select type="number" class="form-select" aria-label=""
-          [(ngModel)]="tornillo.cantidad"
+          [(ngModel)]="_tornillo.cantidad"
           name="cantidad"
           required
           min="1"

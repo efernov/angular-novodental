@@ -1,0 +1,12 @@
+
+.container {
+    display: inline-flex;
+    flex-direction: row;
+    column-gap: 50px;
+    margin-bottom: 50px;
+
+}
+div {
+  margin-left: 10px;
+  align-items: center;
+}

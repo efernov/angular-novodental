@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
   logo: '../assets/logotipoG.jpg',
-  host: 'https://novodental.herokuapp.com/api/',
-  itemsPorPagina: 10
+  host: 'https://novodental-api.herokuapp.com/api/',
+  itemsPorPagina: 100
 };

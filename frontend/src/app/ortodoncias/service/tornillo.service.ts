@@ -19,10 +19,6 @@ export class TornilloService {
   private http: HttpClient,
   private auxService: AuxiliarService) { }
 
-  /* getTornillo(): Observable<Tornillo[]> {
-    debugger;
-  return this.http.get<Tornillo[]>(this.urlEndPoint+'/findall');
-  } */
   getTornillo(): Observable<any> {
     return this.http.get<any>(this.urlTornillos);
     }
@@ -32,7 +28,6 @@ export class TornilloService {
   if(respuestaApi._embedded.tornillo){
     respuestaApi._embedded.tornillo.forEach((p: any) => {
     tornillos.push(this.mapearTornillo(p));
-
     });
   }
   return tornillos;
@@ -54,14 +49,12 @@ export class TornilloService {
   }
 
   postTornillo(tornillo: TornilloImpl): Observable<any> {
-    debugger;
     tornillo.ortodoncia = this.urlOrtodoncia + tornillo.ortodoncia;
     return this.http.post<any>(this.urlTornillos, tornillo);
   }
 
   deleteTornillo(id: number):Observable<any> {
     const url = `${this.urlTornillos}/${id}`;
-    debugger;
     return this.http.delete<any>(url);
   }
 

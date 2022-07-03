@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuxiliarService } from 'src/app/service/auxiliar.service';
 import { Material } from '../models/material';
+import { MaterialImpl } from '../models/material-impl';
 import { MaterialService } from '../service/material.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { MaterialService } from '../service/material.service';
 export class MaterialesComponent implements OnInit {
   materiales: Material[] = [];
   todosMateriales: Material[] = [];
+  materialVerDatos: Material = new MaterialImpl(0, 0, 0, 0, 0, 0, "", "", "", "");
 
   constructor(
     private materialService: MaterialService,
@@ -26,5 +28,8 @@ export class MaterialesComponent implements OnInit {
     this.materiales = this.materialService.extraerMateriales(response));
   }
 
+  verDatos(material: Material): void {
+    this.materialVerDatos = material;
+  }
 
 }

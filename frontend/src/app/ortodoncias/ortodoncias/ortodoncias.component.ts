@@ -29,11 +29,9 @@ export class OrtodonciasComponent implements OnInit {
   }
 
   ortodonciaEliminar(ortodoncia: Ortodoncia): void {
-    debugger;
     console.log(`He eliminado a ${ortodoncia.id}`);
     this.ortodonciaService.deleteOrtodoncia(ortodoncia.id).subscribe(
       () => {
-        debugger;
         this.getTodasOrtodoncias();
       },
       (error) => {console.error(error);}
@@ -43,7 +41,9 @@ export class OrtodonciasComponent implements OnInit {
 
   getTodasOrtodoncias(): void {
     this.ortodonciaService.getOrtodoncias().subscribe((response) =>
-    this.ortodoncias = this.ortodonciaService.extraerOrtodoncias(response));
+    {
+      this.ortodoncias = this.ortodonciaService.extraerOrtodoncias(response);
+    });
   }
 
 }

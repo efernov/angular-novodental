@@ -6,23 +6,25 @@ export class MaterialImpl implements Material {
   cantidad: number=0;
   diametroMilimetro: number = 0;
   longitudCentimetro: number = 0;
-  direccionApertura: string = "";
   aperturaMilimetro: number = 0;
+  direccionApertura: string = "";
   urlTornillo: string = "";
   urlAlambre:string = '';
   ortodoncia: string = "";
 
 
-constructor (id:number, precio:number, cantidad:number,urlAlambre:string, urlTornillo: string, ortodoncia:string) {
+constructor (id:number, precio:number, cantidad:number, diametroMilimetro:number, longitudCentimetro:number, aperturaMilimetro:number, direccionApertura:string, urlAlambre:string, urlTornillo: string, ortodoncia:string) {
   this.id = id;
   this.precio = precio;
   this.cantidad =cantidad;
+  this.diametroMilimetro = diametroMilimetro;
+  this.longitudCentimetro = longitudCentimetro;
+  this.aperturaMilimetro = aperturaMilimetro;
+  this.direccionApertura = direccionApertura;
   this.urlAlambre = urlAlambre;
   this.urlTornillo = urlTornillo;
   this.ortodoncia = ortodoncia;
 
 }
-
-
 
 }

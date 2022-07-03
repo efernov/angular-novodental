@@ -20,10 +20,6 @@ export class AlambreService {
   private http: HttpClient,
   private auxService: AuxiliarService) { }
 
-/* getAlambre(): Observable<Alambre[]> {
-    debugger;
-  return this.http.get<Alambre[]>(this.urlEndPoint+'/findall');
-  } */
   getAlambre(): Observable<any> {
     return this.http.get<any>(this.urlAlambres);
     }
@@ -42,7 +38,6 @@ export class AlambreService {
     const urlSelf = alambreApi._links.self.href;
     const url = urlSelf.split('/');
 	  const id =   parseInt(url[url.length -1]);
-debugger;
   return new AlambreImpl(
     id,
   alambreApi.precio,
@@ -54,14 +49,12 @@ debugger;
   }
 
   postAlambre(alambre: AlambreImpl): Observable<any>{
-    debugger;
     alambre.ortodoncia=  this.urlOrtodoncia+alambre.ortodoncia;
     return this.http.post<any>(this.urlAlambres, alambre);
   }
 
   deleteAlambre(id: number):Observable<any> {
     const url = `${this.urlAlambres}/${id}`;
-    debugger;
     return this.http.delete<any>(url);
   }
 

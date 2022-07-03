@@ -25,13 +25,11 @@ tornilloEvent = new EventEmitter<TornilloImpl>();
     private router: Router) { }
 
   ngOnInit(): void {
-    debugger;
     console.log(this.ortodonciaId);
   }
 
   @Input('tornillo')
   set tornillo(tornillo: any) {
-    debugger;
     if(tornillo && tornillo.urlTornillo){
       this._tornillo = tornillo;
     }else{
@@ -40,7 +38,6 @@ tornilloEvent = new EventEmitter<TornilloImpl>();
   }
 
   create(f: NgForm) {
-    debugger;
     if(f.valid && f.value.cantidad !==0 && f.value.precio !==0 && f.value.direccionApertura !==0 && f.value.aperturaMilimetros !==0) {
       //servicio de back
       this._tornillo.ortodoncia = this.ortodonciaId.toString();

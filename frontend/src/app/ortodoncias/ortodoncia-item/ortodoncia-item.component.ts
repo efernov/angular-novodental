@@ -20,8 +20,7 @@ export class OrtodonciaItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.ortodonciaService.borrarOrtodoncia().subscribe((response) =>
-    // this.ortodoncias = this.ortodonciaService.deleteOrtodoncia(response));
+
   }
 
   onOrtodonciaEliminar(): void {

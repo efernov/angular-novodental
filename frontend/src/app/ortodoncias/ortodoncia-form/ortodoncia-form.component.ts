@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { faPencil, faRuble, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { MaterialService } from 'src/app/materiales/service/material.service';
@@ -17,7 +18,6 @@ export class OrtodonciaFormComponent implements OnInit {
   ortodoncia: OrtodonciaImpl = new OrtodonciaImpl(0, '', '', '', 0, [], '', '');
   disabledMaterial:boolean = true;
   materiales:any[]=[];
-  ortodonciaId:string='';
   materialSeleccionado:any;
   faPencil = faPencil;
   faBasura = faTrashCan;
@@ -29,12 +29,16 @@ export class OrtodonciaFormComponent implements OnInit {
     private materialService: MaterialService,
     private tornilloService: TornilloService,
     private alambreService: AlambreService,
-    private activateRoute: ActivatedRoute) { }
+    private activateRoute: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
-    this.ortodonciaId = this.activateRoute.snapshot.params['id'];
-    if(this.ortodonciaId){
-      this.ortodonciaService.findById(this.ortodonciaId).subscribe(
+    this.ortodoncia.id = this.activateRoute.snapshot.params['id'];
+    if(!this.ortodoncia.id){
+      this.ortodoncia.id =0;
+    }
+    if(this.ortodoncia.id != 0){
+      this.ortodonciaService.findById(this.ortodoncia.id.toString()).subscribe(
         (response)=>{
           this.ortodoncia = this.ortodonciaService.mapearOrtodoncia(response);
           // Lista de materiales
@@ -45,14 +49,11 @@ export class OrtodonciaFormComponent implements OnInit {
           console.error(error);
         }
       );
-    }else{
-      this.ortodonciaId = '-1';
     }
   }
 
   create() {
-    debugger;
-    const ortAux = new OrtodonciaImpl(parseInt(this.ortodonciaId),
+    const ortAux = new OrtodonciaImpl(parseInt(this.ortodoncia.id.toString()),
       this.ortodoncia.tipoTrabajo,
       this.ortodoncia.fechaSalida+'T00:00:00.00Z',
       this.ortodoncia.fechaEntrada+'T00:00:00.00Z',
@@ -60,12 +61,13 @@ export class OrtodonciaFormComponent implements OnInit {
       this.ortodoncia.materiales,
       this.ortodoncia.urlOrtodoncia,
       this.ortodoncia.urlMaterial);
-      if(this.ortodonciaId){
+
+      if(this.ortodoncia.id != 0){
         this.ortodonciaService.modificarOrtodoncia(ortAux).subscribe(
           (response) => {
             this.ortodoncia = this.ortodonciaService.mapearOrtodoncia(response);
-            debugger;
             this.disabledMaterial = false;
+             this.router.navigate(['ortodoncias']);
           },
           (error) => {
             console.error(error);
@@ -79,6 +81,37 @@ export class OrtodonciaFormComponent implements OnInit {
           (error) => {
             console.error(error);
           });
+    }
+  }
+
+  generateDate(date:string){
+    const aux: any = date.split('-');
+    const anyo = parseInt(aux[0]);
+    const mes = parseInt(aux[1]);
+    const dia = parseInt(aux[2]);
+
+    return new Date(anyo, mes-1, dia);
+  }
+
+  validarDatefS(event:any, f: NgForm){
+    console.log()
+    const fechaSalida = event.currentTarget.value;
+    const fechaEntrada = f.controls['fechaent'].value;
+    this.validate(f, fechaEntrada, fechaSalida);
+  }
+
+  validarDatefE(event:any, f: NgForm){
+    console.log()
+    const fechaSalida = f.controls['fechasal'].value;
+    const fechaEntrada = event.currentTarget.value;
+    this.validate(f, fechaEntrada, fechaSalida);
+  }
+
+  validate(f: NgForm, fechaEntrada:string, fechaSalida:string){
+    const fS = this.generateDate(fechaSalida);
+    const fE = this.generateDate(fechaEntrada);
+    if(fS.getTime() < fE.getTime()){
+      f.controls['fechasal'].setErrors({error:'La fecha de salida debe ser posterior a la entrada'});
     }
   }
 
@@ -104,15 +137,12 @@ export class OrtodonciaFormComponent implements OnInit {
       (response)=>{
         this.materiales.push(...this.tornilloService.extraerTornillo(response));
         this.materiales.push(...this.alambreService.extraerAlambre(response));
-
-        debugger;
         let precioTotal =0;
         this.materiales.forEach(m => {
           precioTotal+=m.precio * m.cantidad;
         });
         this.ortodoncia.importeOrtodoncia = precioTotal;
       },
-
       (error) => {console.error(error);}
     );
   }
@@ -125,8 +155,9 @@ export class OrtodonciaFormComponent implements OnInit {
     this.materialSeleccionado = undefined;
   }
 
-  reset(){
+  reset(f: NgForm){
     this.materiales = [];
+    f.resetForm();
 
   }
 

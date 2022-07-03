@@ -32,13 +32,11 @@ export class MaterialService {
     if(respuestaApi._embedded.alambres){
     respuestaApi._embedded.alambres.forEach((a: any) => {
       materiales.push(this.mapearMaterial(a, 'alambre'));
-      debugger;
     });
   }
   if(respuestaApi._embedded.tornillo){
     respuestaApi._embedded.tornillo.forEach((t: any) => {
       materiales.push(this.mapearMaterial(t, 'tornillo'));
-      debugger;
     });
   }
     return materiales;
@@ -49,7 +47,6 @@ export class MaterialService {
     console.log(urlSelf);
     const url = urlSelf.split('/');
 	  const id =   parseInt(url[url.length -1]);
-    debugger;
     let urlTornillo = '';
     let urlAlambre = '';
     if(tipo === 'tornillo'){
@@ -63,9 +60,10 @@ export class MaterialService {
     id,
   materialApi.precio,
   materialApi.cantidad,
-  // materialApi.diametroMilimetro,
-  // materialApi.longitudCentimetro,
-  // materialApi.direccionApertura,
+   materialApi.diametroMilimetro,
+   materialApi.longitudCentimetro,
+   materialApi.aperturaMilimetros,
+   materialApi.direccionApertura,
   urlAlambre,
   urlTornillo,
   materialApi.ortodoncia,);

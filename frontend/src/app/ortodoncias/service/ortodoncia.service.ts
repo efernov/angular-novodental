@@ -32,7 +32,6 @@ export class OrtodonciaService {
   const ortodoncias: Ortodoncia[] = [];
   respuestaApi._embedded.ortodoncias.forEach((p: any) => {
   ortodoncias.push(this.mapearOrtodoncia(p));
-
   });
   return ortodoncias;
   }
@@ -42,15 +41,13 @@ export class OrtodonciaService {
     const url = urlSelf.split('/');
 	  const id =   parseInt(url[url.length -1]);
     const urlMaterial = ortodonciaApi._links.materiales.href;
-
     const fechaSal = ortodonciaApi.fechaSalida.split('T')[0];
     const fechaEnt = ortodonciaApi.fechaEntrada.split('T')[0];
-
   return new OrtodonciaImpl(
     id,
   ortodonciaApi.tipoTrabajo,
-  fechaEnt,
   fechaSal,
+  fechaEnt,
   ortodonciaApi.importeOrtodoncia,
   ortodonciaApi.urlOrtodoncia,
   ortodonciaApi.materiales,
@@ -67,12 +64,10 @@ export class OrtodonciaService {
 
   deleteOrtodoncia(id: number):Observable<any> {
     const url = `${this.urlEndPoint}/${id}`;
-    debugger;
     return this.http.delete<any>(url);
   }
 
   modificarOrtodoncia(ortodoncia: OrtodonciaImpl) {
-    debugger;
     return this.http.put<any>(`${this.urlEndPoint}/${ortodoncia.id}`, ortodoncia);
   }
 

@@ -8,18 +8,14 @@ import { MaterialItemComponent } from './material-item/material-item.component';
 import { CoreModule } from '../core/core.module';
 import { HomeModule } from '../home/home.module';
 import { FormsModule } from '@angular/forms';
-import { MaterialFormComponent } from './material-form/material-form.component';
-import { AlambreComponent } from './alambre/alambre.component';
-import { TornilloComponent } from './tornillo/tornillo.component';
+
+
 
 
 @NgModule({
   declarations: [
     MaterialesComponent,
-    MaterialFormComponent,
     MaterialItemComponent,
-    AlambreComponent,
-    TornilloComponent
   ],
   imports: [
     CommonModule,

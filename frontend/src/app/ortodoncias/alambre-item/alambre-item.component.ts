@@ -8,7 +8,7 @@ import { AlambreImpl } from '../models/alambre-impl';
   styleUrls: ['./alambre-item.component.css']
 })
 export class AlambreItemComponent implements OnInit {
-  @Input() alambre: Alambre = new AlambreImpl(0, 0, 0, 0, 0, "");
+  @Input() alambre: Alambre = new AlambreImpl(0, 0, 0, 0, 0, "", "");
   @Output() alambreSeleccionado = new EventEmitter<Alambre>();
 
   constructor() { }

@@ -18,58 +18,77 @@ export class MaterialService {
     private http: HttpClient,
     private auxService: AuxiliarService) { }
 
-/* getMateriales(): Observable<Material[]> {
-    debugger;
-  return this.http.get<Material[]>(this.urlEndPoint+'/findall');
-  } */
+
   getMateriales(): Observable<any> {
     return this.http.get<any>(this.urlEndPoint);
     }
 
-  extraerMateriales(respuestaApi: any): Material[] {
-  const materiales: Material[] = [];
-  respuestaApi._embedded.material.forEach((p: any) => {
-  materiales.push(this.mapearMaterial(p));
+    findById(id:string): Observable<any> {
+      return this.http.get<any>(`${this.urlEndPoint}/${id}` );
+    }
 
-  });
-  return materiales;
+  extraerMateriales(respuestaApi: any): Material[] {
+    const materiales: Material[] = [];
+    if(respuestaApi._embedded.alambres){
+    respuestaApi._embedded.alambres.forEach((a: any) => {
+      materiales.push(this.mapearMaterial(a, 'alambre'));
+    });
+  }
+  if(respuestaApi._embedded.tornillo){
+    respuestaApi._embedded.tornillo.forEach((t: any) => {
+      materiales.push(this.mapearMaterial(t, 'tornillo'));
+    });
+  }
+    return materiales;
   }
 
-  mapearMaterial(materialApi: any): MaterialImpl {
+  mapearMaterial(materialApi: any, tipo:string): MaterialImpl {
     const urlSelf = materialApi._links.self.href;
     console.log(urlSelf);
     const url = urlSelf.split('/');
 	  const id =   parseInt(url[url.length -1]);
+    let urlTornillo = '';
+    let urlAlambre = '';
+    if(tipo === 'tornillo'){
+      urlTornillo = `${this.host}tornillo/${id}`;
+    }else{
+      urlAlambre = `${this.host}alambre/${id}`;
+    }
+
 
   return new MaterialImpl(
     id,
   materialApi.precio,
-  materialApi.ortodoncia,
-  materialApi.urlMaterial,
-  materialApi.tipoMaterial);
+  materialApi.cantidad,
+   materialApi.diametroMilimetro,
+   materialApi.longitudCentimetro,
+   materialApi.aperturaMilimetros,
+   materialApi.direccionApertura,
+  urlAlambre,
+  urlTornillo,
+  materialApi.ortodoncia,);
   }
 
   create(material: Material): void {
   console.log(`Se ha creado el Material: ${JSON.stringify(material)}`);
   }
 
+  findMateriaByOrtodoncia(urlMaterial:string):Observable<any> {
+    return this.http.get<any>(urlMaterial);
+  }
+
   postOrtodoncia(material: MaterialImpl){
     this.http.post(this.urlEndPoint, material).subscribe();
   }
 
-  deleteMaterial(id: number):Observable<any> {
+  deleteMaterial(id: string):Observable<any> {
     const url = `${this.urlEndPoint}/${id}`;
     debugger;
     return this.http.delete<any>(url);
   }
 
-  patchMaterial(material: MaterialImpl) {
-    return this.http.patch<any>(`${this.urlEndPoint}/${material.id}`, material);
+  modificarMaterial(material: MaterialImpl) {
+    return this.http.put<any>(`${this.urlEndPoint}/${material.id}`, material);
   }
-
-  getMaterialPagina(pagina: number): Observable<any> {
-  return this.auxService.getItemsPorPagina(this.urlEndPoint, pagina);
-  }
-
 
 }

@@ -19,58 +19,56 @@ export class OrtodonciaService {
   private http: HttpClient,
   private auxService: AuxiliarService) { }
 
-  /* getOrtodoncias(): Observable<Ortodoncia[]> {
-    debugger;
-  return this.http.get<Ortodoncia[]>(this.urlEndPoint+'/findall');
-  } */
+
   getOrtodoncias(): Observable<any> {
     return this.http.get<any>(this.urlEndPoint);
     }
+
+  findById(id:string): Observable<any> {
+    return this.http.get<any>(`${this.urlEndPoint}/${id}` );
+  }
 
   extraerOrtodoncias(respuestaApi: any): Ortodoncia[] {
   const ortodoncias: Ortodoncia[] = [];
   respuestaApi._embedded.ortodoncias.forEach((p: any) => {
   ortodoncias.push(this.mapearOrtodoncia(p));
-
   });
   return ortodoncias;
   }
 
   mapearOrtodoncia(ortodonciaApi: any): OrtodonciaImpl {
     const urlSelf = ortodonciaApi._links.self.href;
-    console.log(urlSelf);
     const url = urlSelf.split('/');
 	  const id =   parseInt(url[url.length -1]);
-
+    const urlMaterial = ortodonciaApi._links.materiales.href;
+    const fechaSal = ortodonciaApi.fechaSalida.split('T')[0];
+    const fechaEnt = ortodonciaApi.fechaEntrada.split('T')[0];
   return new OrtodonciaImpl(
     id,
   ortodonciaApi.tipoTrabajo,
-  ortodonciaApi.fechaEntrada,
-  ortodonciaApi.fechaSalida,
+  fechaSal,
+  fechaEnt,
   ortodonciaApi.importeOrtodoncia,
   ortodonciaApi.urlOrtodoncia,
-  ortodonciaApi.materiales);
+  ortodonciaApi.materiales,
+  urlMaterial);
   }
 
   create(ortodoncia: Ortodoncia): void {
   console.log(`Se ha creado la ortodoncia: ${JSON.stringify(ortodoncia)}`);
   }
 
-  postOrtodoncia(ortodoncia: OrtodonciaImpl){
-    this.http.post(this.urlEndPoint, ortodoncia).subscribe();
+  postOrtodoncia(ortodoncia: OrtodonciaImpl):Observable<any>{
+    return this.http.post<any>(this.urlEndPoint, ortodoncia);
   }
 
   deleteOrtodoncia(id: number):Observable<any> {
     const url = `${this.urlEndPoint}/${id}`;
-    debugger;
     return this.http.delete<any>(url);
   }
 
-  patchOrtodoncia(ortodoncia: OrtodonciaImpl) {
-    return this.http.patch<any>(`${this.urlEndPoint}/${ortodoncia.id}`, ortodoncia);
+  modificarOrtodoncia(ortodoncia: OrtodonciaImpl) {
+    return this.http.put<any>(`${this.urlEndPoint}/${ortodoncia.id}`, ortodoncia);
   }
 
-  getOrtodonciasPagina(pagina: number): Observable<any> {
-  return this.auxService.getItemsPorPagina(this.urlEndPoint, pagina);
-  }
 }

@@ -12,68 +12,58 @@ import { AlambreImpl } from '../models/alambre-impl';
 export class AlambreService {
 
   private host: string = environment.host;
-  private urlEndPoint: string = `${this.host}alambre`;
+  private urlAlambres: string = `${this.host}alambres`;
+  private urlOrtodoncia: string = `${this.host}ortodoncia/`;
 
 
   constructor(
   private http: HttpClient,
   private auxService: AuxiliarService) { }
 
-/* getAlambre(): Observable<Alambre[]> {
-    debugger;
-  return this.http.get<Alambre[]>(this.urlEndPoint+'/findall');
-  } */
   getAlambre(): Observable<any> {
-    return this.http.get<any>(this.urlEndPoint);
+    return this.http.get<any>(this.urlAlambres);
     }
 
   extraerAlambre(respuestaApi: any): Alambre[] {
-  const alambres: Alambre[] = [];
-  respuestaApi._embedded.alambres.forEach((p: any) => {
-  alambres.push(this.mapearAlambre(p));
-
-  });
-  return alambres;
+    const alambres: Alambre[] = [];
+    if(respuestaApi._embedded.alambres){
+      respuestaApi._embedded.alambres.forEach((p: any) => {
+        alambres.push(this.mapearAlambre(p));
+      });
+    }
+    return alambres;
   }
 
   mapearAlambre(alambreApi: any): AlambreImpl {
     const urlSelf = alambreApi._links.self.href;
-    console.log(urlSelf);
     const url = urlSelf.split('/');
 	  const id =   parseInt(url[url.length -1]);
-
   return new AlambreImpl(
     id,
   alambreApi.precio,
   alambreApi.diametroMilimetro,
   alambreApi.longitudCentimetro,
   alambreApi.cantidad,
-  alambreApi.urlAlambre);
+  alambreApi._links.alambre.href,
+  alambreApi._links.ortodoncia.href);
   }
 
-  create(alambre: Alambre): void {
-  console.log(`Se ha creado un Alambre: ${JSON.stringify(alambre)}`);
-  }
-
-  postAlambre(alambre: AlambreImpl){
-    this.http.post(this.urlEndPoint, alambre).subscribe();
+  postAlambre(alambre: AlambreImpl): Observable<any>{
+    alambre.ortodoncia=  this.urlOrtodoncia+alambre.ortodoncia;
+    return this.http.post<any>(this.urlAlambres, alambre);
   }
 
   deleteAlambre(id: number):Observable<any> {
-    const url = `${this.urlEndPoint}/${id}`;
-    debugger;
+    const url = `${this.urlAlambres}/${id}`;
     return this.http.delete<any>(url);
   }
 
-  patchAlambre(alambre: AlambreImpl) {
-    return this.http.patch<any>(`${this.urlEndPoint}/${alambre.id}`, alambre);
+  modificarAlambre(alambre: AlambreImpl) {
+    return this.http.put<any>(`${this.urlAlambres}/${alambre.id}`, alambre);
   }
 
   getAlambresPagina(pagina: number): Observable<any> {
-  return this.auxService.getItemsPorPagina(this.urlEndPoint, pagina);
+  return this.auxService.getItemsPorPagina(this.urlAlambres, pagina);
   }
-
-
-
 
 }

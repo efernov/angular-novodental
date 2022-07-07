@@ -34,7 +34,6 @@
           'is-invalid': precio.invalid && (precio.dirty || precio.touched),
           'is-valid': !precio.invalid && precio.dirty && precio.value !=0}">
 
-
       <div class="text-danger"
         *ngIf="precio.invalid && (precio.dirty || precio.touched) || (precio.value ==0 && precio.dirty)">
                 El precio del Alambre es obligatorio

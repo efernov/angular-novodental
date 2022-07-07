@@ -105,8 +105,8 @@
                 <tbody>
                   <tr *ngFor = "let material of materiales">
                     <td>
-                      <span *ngIf="material.urlAlambre">alambre</span>
-                      <span *ngIf="material.urlTornillo">tornillo</span>
+                      <span *ngIf="material.urlAlambre">alambre diametro {{material.diametroMilimetro}} mm y longitud {{material.longitudCentimetro}} cm </span>
+                      <span *ngIf="material.urlTornillo">tornillo {{material.direccionApertura}} {{material.aperturaMilimetros}} mm de apertura</span>
                     </td>
                     <td>{{material.cantidad}}</td>
                     <td>{{material.precio}}</td>

@@ -21,6 +21,7 @@ export class OrtodonciaFormComponent implements OnInit {
   materialSeleccionado:any;
   faPencil = faPencil;
   faBasura = faTrashCan;
+  importe:string = '';
   @ViewChild('closeTornillo', { static: false }) btCloseTornillo: ElementRef | undefined;
   @ViewChild('closeAlambre', { static: false }) btCloseAlambre: ElementRef | undefined;
 
@@ -114,9 +115,29 @@ export class OrtodonciaFormComponent implements OnInit {
       f.controls['fechasal'].setErrors({error:'La fecha de salida debe ser posterior a la entrada'});
     }
   }
+  listadoMaterial(){
+    this.materiales = [];
+    this.materialService.findMateriaByOrtodoncia(this.ortodoncia.urlMaterial).subscribe(
+      (response)=>{
+        this.materiales.push(...this.tornilloService.extraerTornillo(response));
+        this.materiales.push(...this.alambreService.extraerAlambre(response));
+      },
+      (error) => {console.error(error);}
+    );
 
+  }
   incluirMaterial(material:any){
     this.listadoMaterial();
+
+      this.ortodonciaService.updateImporte(this.ortodoncia.id.toString()).subscribe(
+        (importe) =>{
+          debugger;
+          this.ortodoncia.importeOrtodoncia  = importe;
+        }
+      );
+
+
+
     this.btCloseTornillo?.nativeElement.click();
     this.btCloseAlambre?.nativeElement.click();
   }
@@ -125,27 +146,19 @@ export class OrtodonciaFormComponent implements OnInit {
     this,this.materialService.deleteMaterial(id).subscribe(
       (response) => {
         this.listadoMaterial();
+        this.ortodonciaService.updateImporte(this.ortodoncia.id.toString()).subscribe(
+          (importe) =>{
+            debugger;
+            this.ortodoncia.importeOrtodoncia  = importe;
+          }
+        );
       },
       (error) => {
         console.error(error);
       });
   }
 
-  listadoMaterial(){
-    this.materiales = [];
-    this.materialService.findMateriaByOrtodoncia(this.ortodoncia.urlMaterial).subscribe(
-      (response)=>{
-        this.materiales.push(...this.tornilloService.extraerTornillo(response));
-        this.materiales.push(...this.alambreService.extraerAlambre(response));
-        let precioTotal =0;
-        this.materiales.forEach(m => {
-          precioTotal+=m.precio * m.cantidad;
-        });
-        this.ortodoncia.importeOrtodoncia = precioTotal;
-      },
-      (error) => {console.error(error);}
-    );
-  }
+
 
   editarMaterial(material:any){
     this.materialSeleccionado = material;

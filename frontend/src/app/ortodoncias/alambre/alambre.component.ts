@@ -29,7 +29,6 @@ export class AlambreComponent implements OnInit {
 
   @Input('alambre')
   set alambre(alambre: any) {
-    debugger;
     if(alambre && alambre.urlAlambre){
       this._alambre = alambre;
     }else{
@@ -38,14 +37,12 @@ export class AlambreComponent implements OnInit {
   }
 
   create(f: NgForm) {
-    debugger;
     if(f.valid && f.value.cantidad !==0 && f.value.precio !== 0 && f.value.diametroMilimetro !== 0 && f.value.logitudCentimetro !== 0){
       //servicio de back
       this._alambre.ortodoncia =this.ortodonciaId.toString();
 
       this.alambreService.postAlambre(this._alambre).subscribe(
         (response) =>{
-          debugger;
           this.alambreEvent.emit(this.alambreService.mapearAlambre(response));
 
           if(this.ortodonciaId){

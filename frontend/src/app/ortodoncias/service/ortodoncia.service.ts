@@ -13,6 +13,7 @@ import { OrtodonciaImpl } from '../models/ortodoncia-impl';
 export class OrtodonciaService {
 
   private host: string = environment.host;
+  private hostPer: string = environment.hostPer;
   private urlEndPoint: string = `${this.host}ortodoncias`;
 
   constructor(
@@ -26,6 +27,10 @@ export class OrtodonciaService {
 
   findById(id:string): Observable<any> {
     return this.http.get<any>(`${this.urlEndPoint}/${id}` );
+  }
+
+  updateImporte(id:string): Observable<number>{
+  return this.http.get<any>(`${this.hostPer}ortodoncia/importe?id=${id}` );
   }
 
   extraerOrtodoncias(respuestaApi: any): Ortodoncia[] {

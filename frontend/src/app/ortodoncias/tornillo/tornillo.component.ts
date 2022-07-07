@@ -30,6 +30,7 @@ tornilloEvent = new EventEmitter<TornilloImpl>();
 
   @Input('tornillo')
   set tornillo(tornillo: any) {
+
     if(tornillo && tornillo.urlTornillo){
       this._tornillo = tornillo;
     }else{
@@ -41,7 +42,6 @@ tornilloEvent = new EventEmitter<TornilloImpl>();
     if(f.valid && f.value.cantidad !==0 && f.value.precio !==0 && f.value.direccionApertura !==0 && f.value.aperturaMilimetros !==0) {
       //servicio de back
       this._tornillo.ortodoncia = this.ortodonciaId.toString();
-
       this.tornilloService.postTornillo(this._tornillo).subscribe(
         (response) =>{
           debugger;

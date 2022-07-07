@@ -83,7 +83,6 @@ export class MaterialService {
 
   deleteMaterial(id: string):Observable<any> {
     const url = `${this.urlEndPoint}/${id}`;
-    debugger;
     return this.http.delete<any>(url);
   }
 

@@ -1,7 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuxiliarService } from 'src/app/service/auxiliar.service';
+import { Alambre } from '../models/alambre';
+import { AlambreImpl } from '../models/alambre-impl';
 import { Ortodoncia } from '../models/ortodoncia';
 import { OrtodonciaImpl } from '../models/ortodoncia-impl';
+import { Tornillo } from '../models/tornillo';
+import { TornilloImpl } from '../models/tornillo-impl';
 import { OrtodonciaService } from '../service/ortodoncia.service';
 
 @Component({

@@ -111,11 +111,11 @@
                     <td>{{material.cantidad}}</td>
                     <td>{{material.precio}}</td>
                     <td>
-                      <button (click)="editarMaterial(material)" *ngIf="material.urlAlambre" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#alambre">Editar <fa-icon [icon] = "faPencil"></fa-icon></button>
-                      <button (click)="editarMaterial(material)" *ngIf="material.urlTornillo" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#tornillo">Editar <fa-icon [icon] = "faPencil"></fa-icon></button>
+                      <button (click)="editarMaterial(material)" *ngIf="material.urlAlambre" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#alambre"><fa-icon [icon] = "faPencil"></fa-icon></button>
+                      <button (click)="editarMaterial(material)" *ngIf="material.urlTornillo" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#tornillo"><fa-icon [icon] = "faPencil"></fa-icon></button>
                     </td>
                     <td>
-                        <button class="btn btn-danger" (click)="eliminarMaterial(material.id)">Borrar<fa-icon [icon] = "faBasura"></fa-icon></button>
+                        <button class="btn btn-danger" (click)="eliminarMaterial(material.id)"><fa-icon [icon] = "faBasura"></fa-icon></button>
                     </td>
                   </tr>
                 </tbody>

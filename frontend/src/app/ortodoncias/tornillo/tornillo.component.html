@@ -23,7 +23,7 @@
     </article>
 
     <article class="col-2">
-      <select class="form-select"
+      <input type="number"
           [(ngModel)]="_tornillo.precio"
            name="precio"
           required
@@ -33,14 +33,7 @@
           [ngClass]="{
             'is-invalid': precio.invalid && (precio.dirty || precio.touched),
             'is-valid': !precio.invalid && precio.dirty && precio.value !=0}">
-        <option value="0">Seleccione un valor</option>
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="15">15</option>
-        <option value="20">20</option>
-        <option value="25">25</option>
-        <option value="30">30</option>
-      </select>
+
 
       <div class="text-danger"
             *ngIf="precio.invalid && (precio.dirty || precio.touched) || (precio.value ==0 && precio.dirty)">
@@ -105,7 +98,7 @@
     </article>
 
     <article class="col-2">
-      <select class="form-select" aria-label=""
+      <input type="number" aria-label=""
           [(ngModel)]="_tornillo.cantidad"
           name="cantidad"
           required
@@ -115,12 +108,6 @@
           [ngClass]="{
             'is-invalid': cantidad.invalid && (cantidad.dirty || cantidad.touched),
             'is-valid': !cantidad.invalid && cantidad.dirty}">
-        <option value="0">Seleccione un valor</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
 
       <div class="text-danger"
           *ngIf="cantidad.invalid && (cantidad.dirty || cantidad.touched) || (cantidad.value ==0 && cantidad.dirty)">
